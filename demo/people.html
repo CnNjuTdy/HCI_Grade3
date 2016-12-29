@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>WeSporter</title>
+    <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="common/css/flat-ui.css" rel="stylesheet">
+
+    <link href="http://cdn.bootcss.com/jquery-confirm/2.5.1/jquery-confirm.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">WeSporter</a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-collapse-01">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="sport.html">运动</a></li>
+                        <li><a href="activity.html">活动</a></li>
+                        <li><a href="people.html">圈子</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="setting.html"><span class="fui-user"></span></a></li>
+                        <li><a href="message.html"><span class="fui-info-circle"></span></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div><!-- /.navbar-collapse -->
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-success">
+                <div class="panel-heading text-center">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" type="search" placeholder="输入昵称搜索好友">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn">
+                                    <span class="fui-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="common/img/head.jpg" alt="example-image"
+                                     class="img-responsive img-rounded">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="sas"><a>不会打篮球的迈克尔乔丹</a></div>
+                                <div style="margin-top: 7px"><strong>
+                                    <small><em>打篮球吗，带我一个，我发球贼6</em></small>
+                                </strong></div>
+                            </div>
+                            <div class="col-md-2 text-danger text-center" onclick="delete_my(this)">
+                                <div><span class="fui-cross" style=""></span></div>
+                                <div style="margin-top: 7px">
+                                    <small>删除好友</small>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="common/img/head.jpg" alt="example-image"
+                                     class="img-responsive img-rounded">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="sas"><a>不会打篮球的迈克尔乔丹</a></div>
+                                <div style="margin-top: 7px"><strong>
+                                    <small><em>打篮球吗，带我一个，我发球贼6</em></small>
+                                </strong></div>
+                            </div>
+                            <div class="col-md-2 text-danger text-center" onclick="delete_my(this)">
+                                <div><span class="fui-cross" style=""></span></div>
+                                <div style="margin-top: 7px">
+                                    <small>删除好友</small>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="common/img/head.jpg" alt="example-image"
+                                     class="img-responsive img-rounded">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="sas"><a>不会打篮球的迈克尔乔丹</a></div>
+                                <div style="margin-top: 7px"><strong>
+                                    <small><em>打篮球吗，带我一个，我发球贼6</em></small>
+                                </strong></div>
+                            </div>
+                            <div class="col-md-2 text-danger text-center" onclick="delete_my(this)">
+                                <div><span class="fui-cross" style=""></span></div>
+                                <div style="margin-top: 7px">
+                                    <small>删除好友</small>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="common/img/head.jpg" alt="example-image"
+                                     class="img-responsive img-rounded">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="sas"><a>不会打篮球的迈克尔乔丹</a></div>
+                                <div style="margin-top: 7px"><strong>
+                                    <small><em>打篮球吗，带我一个，我发球贼6</em></small>
+                                </strong></div>
+                            </div>
+                            <div class="col-md-2 text-danger text-center" onclick="delete_my(this)">
+                                <div><span class="fui-cross" style=""></span></div>
+                                <div style="margin-top: 7px">
+                                    <small>删除好友</small>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="common/img/head.jpg" alt="example-image"
+                                     class="img-responsive img-rounded">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="sas"><a>不会打篮球的迈克尔乔丹</a></div>
+                                <div style="margin-top: 7px"><strong>
+                                    <small><em>打篮球吗，带我一个，我发球贼6</em></small>
+                                </strong></div>
+                            </div>
+                            <div class="col-md-2 text-danger text-center" onclick="delete_my(this)">
+                                <div><span class="fui-cross" style=""></span></div>
+                                <div style="margin-top: 7px">
+                                    <small>删除好友</small>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" id="navbarInput-01" type="search" placeholder="输入昵称添加用户">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn">
+                                    <span>添加</span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading text-center   ">推荐好友</div>
+                <div class="panel-body text-center">
+                    <div class="row">这里是好友信息</div>
+                    <br><br><br>
+                    <div class="row"><small><em>不满意？你可以 <a href="#">换一个</a>或者尝试<a href="setting.html">修改偏好设置</a></em></small></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/flat-ui/2.3.0/js/vendor/video.js"></script>
+<script src="http://cdn.bootcss.com/flat-ui/2.3.0/js/flat-ui.min.js"></script>
+<script src="common/js/application.js"></script>
+<script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+
+<script src="http://cdn.bootcss.com/jquery-confirm/2.5.1/jquery-confirm.min.js"></script>
+
+<script src="common/js/people.js"></script>
+</body>
+</html>
