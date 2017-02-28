@@ -1,0 +1,64 @@
+@CHARSET "UTF-8";
+//按钮样式
+
+	.button{
+	    width:199px;
+        height:232px;
+        background-color:transparent;
+        border:none;
+        -webkit-transition-duration: 0.4s;
+    	transition-duration: 0.4s;
+	}
+    .button1{
+		width:199px;
+        height:232px;
+        background-color:transparent;
+        border:none;
+        -webkit-transition-duration: 0.4s;
+		transition-duration: 0.4s;
+        margin-left:300px; margin-top:20%; 
+    	background-image:url("../img/p1.png");
+    	}
+    .button1:hover{
+    	background-image:url("../img/p2.png");
+    	}
+    .button2{
+    	width:199px;
+        height:232px;
+        background-color:transparent;
+        border:none;
+        -webkit-transition-duration: 0.4s;
+    	transition-duration: 0.4s;
+ 		margin-left:100px; margin-top:20%; 
+    	background-image:url("../img/p3.png");
+    	}
+    .button2:hover{
+    	background-image:url("../img/p4.png");
+    	}
+     .button3{
+     	width:199px;
+        height:232px;
+        background-color:transparent;
+        border:none;
+        -webkit-transition-duration: 0.4s;
+    	transition-duration: 0.4s;
+        margin-left:100px; margin-top:20%; 
+    	background-image:url("../img/p5.png");
+    	}
+    .button3:hover{
+    	background-image:url("../img/p6.png");
+    	}
+     .button4{
+     	width:199px;
+        height:232px;
+        background-color:transparent;
+        border:none;
+        -webkit-transition-duration: 0.4s;
+    	transition-duration: 0.4s;
+        margin-left:100px; margin-top:20%; 
+    	background-image:url("../img/p7.png");
+    	}
+    .button4:hover{
+    	background-image:url("../img/p8.png");
+    	}
+    	

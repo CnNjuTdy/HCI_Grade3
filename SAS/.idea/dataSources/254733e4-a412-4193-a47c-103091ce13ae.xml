@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - hci@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="hci">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="hotel_world"/>
+    <schema id="3" name="information_schema"/>
+    <schema id="4" name="j2ee_student"/>
+    <schema id="5" name="mysql"/>
+    <schema id="6" name="performance_schema"/>
+    <schema id="7" name="phpmyadmin"/>
+    <schema id="8" name="spring_1"/>
+    <schema id="9" name="test"/>
+    <table id="10" parent="1" name="kdj"/>
+    <table id="11" parent="1" name="kdj_update"/>
+    <table id="12" parent="1" name="macd"/>
+    <table id="13" parent="1" name="macd_update"/>
+    <table id="14" parent="1" name="market"/>
+    <table id="15" parent="1" name="rank"/>
+    <table id="16" parent="1" name="stock"/>
+    <table id="17" parent="1" name="stocklist"/>
+    <table id="18" parent="1" name="updateinfo"/>
+    <column id="19" parent="10" name="Kvalue">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="20" parent="10" name="Dvalue">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="21" parent="10" name="Jvalue">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="22" parent="10" name="date">
+      <mandatory>1</mandatory>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="23" parent="10" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(8)|0</data-type>
+    </column>
+    <key id="24" parent="10" name="PRIMARY">
+      <columns>date
+id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="25" parent="11" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(8)|0</data-type>
+    </column>
+    <column id="26" parent="11" name="date">
+      <mandatory>1</mandatory>
+      <data-type>date|0</data-type>
+    </column>
+    <key id="27" parent="11" name="PRIMARY">
+      <columns>id
+date</columns>
+      <primary>1</primary>
+    </key>
+    <column id="28" parent="12" name="MACD">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="29" parent="12" name="DIF">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="30" parent="12" name="EMA12">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="31" parent="12" name="EMA26">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="32" parent="12" name="DEA">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="33" parent="12" name="date">
+      <mandatory>1</mandatory>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="34" parent="12" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(8)|0</data-type>
+    </column>
+    <key id="35" parent="12" name="PRIMARY">
+      <columns>date
+id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="36" parent="13" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(8)|0</data-type>
+    </column>
+    <column id="37" parent="13" name="date">
+      <mandatory>1</mandatory>
+      <data-type>date|0</data-type>
+    </column>
+    <key id="38" parent="13" name="PRIMARY">
+      <columns>id
+date</columns>
+      <primary>1</primary>
+    </key>
+    <column id="39" parent="14" name="date">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="40" parent="14" name="open">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="41" parent="14" name="close">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="42" parent="14" name="low">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="43" parent="14" name="high">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="44" parent="14" name="adj_price">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="45" parent="14" name="volume">
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <key id="46" parent="14" name="PRIMARY">
+      <columns>date</columns>
+      <primary>1</primary>
+    </key>
+    <column id="47" parent="15" name="keyword">
+      <mandatory>1</mandatory>
+      <data-type>varchar(8)|0</data-type>
+    </column>
+    <column id="48" parent="15" name="type">
+      <mandatory>1</mandatory>
+      <data-type>varchar(5)|0</data-type>
+    </column>
+    <column id="49" parent="15" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(8)|0</data-type>
+    </column>
+    <column id="50" parent="15" name="name">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="51" parent="15" name="data">
+      <data-type>double|0</data-type>
+    </column>
+    <key id="52" parent="15" name="PRIMARY">
+      <columns>type
+keyword
+id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="53" parent="16" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(8)|0</data-type>
+    </column>
+    <column id="54" parent="16" name="name">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="55" parent="16" name="date">
+      <mandatory>1</mandatory>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="56" parent="16" name="open">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="57" parent="16" name="close">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="58" parent="16" name="low">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="59" parent="16" name="high">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="60" parent="16" name="volume">
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="61" parent="16" name="adj_price">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="62" parent="16" name="turnover">
+      <data-type>double|0</data-type>
+    </column>
+    <column id="63" parent="16" name="pb">
+      <data-type>double|0</data-type>
+    </column>
+    <key id="64" parent="16" name="PRIMARY">
+      <columns>id
+date</columns>
+      <primary>1</primary>
+    </key>
+    <column id="65" parent="17" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(8)|0</data-type>
+    </column>
+    <column id="66" parent="17" name="name">
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <key id="67" parent="17" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="68" parent="18" name="code">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="69" parent="18" name="date">
+      <data-type>date|0</data-type>
+    </column>
+    <key id="70" parent="18" name="PRIMARY">
+      <columns>code</columns>
+      <primary>1</primary>
+    </key>
+  </database-model>
+</dataSource>

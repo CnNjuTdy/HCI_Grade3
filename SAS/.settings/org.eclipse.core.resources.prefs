@@ -1,0 +1,16 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=4d2b9f5953544d93cff3d898c1c60cc5000c37d1
+eclipse.preferences.version=1
+encoding//src/main/java/analysis/analysis.java=UTF-8
+encoding//src/main/java/dao/MACDDAO.java=UTF-8
+encoding//src/main/java/entity/Stock.java=UTF-8
+encoding//src/main/java/servlet/stockInfo.java=UTF-8
+encoding//src/main/webapp/TestN.jsp=UTF-8
+encoding//src/main/webapp/jsp/analysis.jsp=UTF-8
+encoding//src/main/webapp/jsp/card.jsp=UTF-8
+encoding//src/main/webapp/jsp/lineChart.jsp=UTF-8
+encoding//src/main/webapp/jsp/lineChart_test.jsp=UTF-8
+encoding//src/main/webapp/jsp/stocks.jsp=UTF-8
+encoding//src/main/webapp/test.jsp=UTF-8
+encoding/<project>=UTF-8

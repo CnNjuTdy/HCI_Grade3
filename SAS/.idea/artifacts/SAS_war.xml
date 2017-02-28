@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SAS:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="SAS.war">
+      <element id="artifact" artifact-name="SAS:war exploded" />
+    </root>
+  </artifact>
+</component>

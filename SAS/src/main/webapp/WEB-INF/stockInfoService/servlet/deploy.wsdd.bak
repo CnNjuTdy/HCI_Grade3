@@ -1,0 +1,38 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from stockInfoService WSDL service -->
+
+  <service name="stockInfo" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://servlet"/>
+      <parameter name="wsdlServiceElement" value="stockInfoService"/>
+      <parameter name="schemaQualified" value="http://servlet"/>
+      <parameter name="wsdlServicePort" value="stockInfo"/>
+      <parameter name="className" value="servlet.StockInfoSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="stockInfo"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="doGet" qname="operNS:doGet" xmlns:operNS="http://servlet" soapAction="" >
+        <parameter qname="pns:request" xmlns:pns="http://servlet" type="tns:anyType" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:response" xmlns:pns="http://servlet" type="tns:anyType" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="doGet"/>
+
+      <typeMapping
+        xmlns:ns="http://servlet"
+        qname="ns:>doGetResponse"
+        type="java:servlet.DoGetResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
