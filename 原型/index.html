@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content='text/html;charset=utf-8' http-equiv='Content-Type'>
+<meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
+<meta content='yes' name='apple-mobile-web-app-capable'>
+<meta content='yes' name='mobile-web-app-capable'>
+<meta content='black-translucent' name='apple-mobile-web-app-status-bar-style'>
+<meta content='webkit' name='renderer'>
+<meta content='app-id=1050565468' name='apple-itunes-app'>
+<title>
+HCI
+</title>
+<link href='images/icon_android.png' rel='icon' sizes='192x192'>
+<link href='images/icon_retina.png' rel='apple-touch-icon' sizes='120x120'>
+<link href='images/icon_retina3x.png' rel='apple-touch-icon' sizes='180x180'>
+<link href='images/icon_ipad.png' rel='apple-touch-icon' sizes='144x144'>
+<link href='images/icon_ipad.png' rel='apple-touch-icon' sizes='152x152'>
+<link href='images/splashes/retina.png' media='(device-width: 320px) and (device-height: 568px)' rel='apple-touch-startup-image'>
+<link href='images/splashes/iphone4_portrait_retina.png' media='(device-width: 320px) and (device-height: 480px)' rel='apple-touch-startup-image'>
+<link href='images/splashes/iphone6_portrait_retina.png' media='(device-width: 375px) and (device-height: 667px)' rel='apple-touch-startup-image'>
+<link href='images/splashes/iphone6plus_portrait_retina.png' media='(device-width: 414px) and (device-height: 736px)' rel='apple-touch-startup-image'>
+<link href='images/splashes/ipad_portrait_retina.png' media='(device-width: 768px) and (device-height: 1024px) and (orientation:portrait)' rel='apple-touch-startup-image'>
+<link href='images/splashes/ipad_landscape_retina.png' media='(device-width: 768px) and (device-height: 1024px) and (orientation:landscape)' rel='apple-touch-startup-image'>
+<style>
+  html, body {
+    color: #333333;
+    font-family: -apple-system, "SF UI Text", "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Zen Hei", sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 18px;
+    overflow: hidden;
+    height: 100%; }
+  
+  body {
+    background: #efefef;
+    color: #333333; }
+    body.mobile {
+      background-color: white; }
+  
+  #download, .modal.fade, #header {
+    display: none; }
+  
+  #notification {
+    position: fixed;
+    top: -70px;
+    left: 0; }
+  
+  .notice {
+    padding: 10px;
+    font-size: 14px; }
+    .notice p {
+      margin-bottom: 10px; }
+  
+  .spinner {
+    width: 30px;
+    height: 30px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: rgba(51, 54, 58, 0.6) transparent;
+    border-radius: 100%;
+    transform-origin: 50% 50% 0px;
+    -webkit-animation: mb-spin 0.8s infinite linear;
+    animation: mb-spin 0.8s infinite linear;
+    display: inline-block; }
+  
+  @-webkit-keyframes mb-spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg); }
+  
+    100% {
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg); } }
+  
+  @keyframes mb-spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg); }
+  
+    100% {
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg); } }
+  
+  .actions {
+    visibility: hidden; }
+  
+  #safemode, #logo, #install, .cover, #device {
+    display: none; }
+  
+  #fontawesome {
+    position: absolute;
+    top: -65535px;
+    left: -65535px; }
+    #fontawesome .aw {
+      position: absolute;
+      width: auto;
+      white-space: nowrap; }
+    #fontawesome .ah {
+      position: absolute;
+      height: auto;
+      word-break: break-word;
+      word-wrap: break-word; }
+      #fontawesome .ah p {
+        margin-bottom: 5px;
+        white-space: pre-wrap; }
+        #fontawesome .ah p:last-child {
+          margin-bottom: 0px; }
+  
+  #loading {
+    width: 86px;
+    height: 86px;
+    z-index: 2;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    margin-left: -43px;
+    text-align: center;
+    font-size: 12px; }
+    #loading .logo, #loading .indicator {
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      width: 86px;
+      height: 86px;
+      overflow: hidden;
+      background: url("images/logo-lg.svg");
+      background-size: 86px 86px; }
+    #loading .logo {
+      opacity: 0.3; }
+    #loading .indicator {
+      opacity: 1;
+      -webkit-transition: all 0.5s ease-in-out;
+      -moz-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out;
+      height: 0%; }
+    #loading span {
+      position: absolute;
+      width: 300px;
+      left: 50%;
+      top: 110px;
+      margin-left: -150px;
+      font-size: 14px;
+      line-height: 28px;
+      color: #f77d77; }
+</style>
+
+<style>
+  #splash {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #f0f0f2; }
+    #splash img {
+      position: absolute;
+      top: 0px;
+      left: 0;
+      width: 100%;
+      height: 100%; }
+    #splash img.landscape {
+      display: none; }
+    #splash .spinner {
+      position: absolute;
+      top: 48%;
+      left: 50%;
+      margin-left: -15px; }
+  
+  @media all and (orientation: landscape) {
+    #splash img {
+      position: absolute;
+      left: 0;
+      -webkit-transform: rotate(90deg);
+      -webkit-transform-origin: bottom left; }
+  
+    #splash .spinner {
+      position: absolute;
+      top: 50%;
+      margin-top: -16px; } }
+</style>
+
+
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="nsvYc41KJBzzoCSoPcNOM2zqHYGn8LxflyDLHgxZIvvYabHPD1SQt6U/Fx5iZnJeo3APR5Kxynq+2H23lxgSbg==" />
+</head>
+<body>
+<div id='fontawesome'>
+<i class='fa fa-user'></i>
+<div class='aw'></div>
+<div class='ah'></div>
+</div>
+<div id='loading'>
+<div class='logo'></div>
+<div class='indicator'></div>
+<span>
+正在读取 HCI...
+</span>
+</div>
+<div data-user='null' id='workspace'>
+<div id='install'>
+<div class='app-inner'>
+<img class='app-icon' src='images/icon_android.png'>
+<h1 class='app-name'>
+HCI
+</h1>
+<div class='app-update-time'>
+<span>
+最后更新
+:
+</span>
+<abbr class='timeago' title='2017-03-12T08:36:24Z'></abbr>
+</div>
+<a class='install-btn' href='/app/XeRESLVbrtnTvfENP0rKER2R7T5LzOv?inapp=1'>
+直接查看
+</a>
+<a class='install install-btn'>
+安装
+</a>
+<a class='download' href='https://itunes.apple.com/cn/app/mockingbot/id1050565468?ls=1&amp;mt=8' id='ios-download'>
+下载墨刀客户端获得最佳展示体验
+</a>
+</div>
+</div>
+<div class='cover wechat'>
+<div class='tip-wrapper'>
+<p class='tip'>
+在浏览器中打开
+</p>
+<img class='arrow' src='images/short-arrow.png'>
+</div>
+</div>
+<div class='cover ipad'>
+<div class='tip-wrapper'>
+<p class='tip'>
+请点击
+<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAA1BAMAAADfUYSoAAAAFVBMVEUAAAAGfv8Eff8Xh/8Ae/cAgfcDev8kxpS2AAAABnRSTlMAgGPrExbGXyRsAAAAYUlEQVQ4y+3MsQ2AMBADQMMEofk6VSZgEyZ4Cu8/Ai+QXgpOmTJuYp2cR+aAZGMRM7rOKENzmss1/i/aDaJ5P6thO0s/C0OLJ3PV1/YTfZhtuvFLlOxjk7/LphmWTTPJ0B64+0mEocrEDQAAAABJRU5ErkJggg==' width='19'>
+,
+然后选择&quot;添加到主屏幕&quot;.
+</p>
+<img class='arrow' src='images/short-arrow.png'>
+</div>
+</div>
+<div class='cover iphone'>
+<div class='tip-wrapper iphone'>
+<p class='tip'>
+请点击
+<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAA1BAMAAADfUYSoAAAAFVBMVEUAAAAGfv8Eff8Xh/8Ae/cAgfcDev8kxpS2AAAABnRSTlMAgGPrExbGXyRsAAAAYUlEQVQ4y+3MsQ2AMBADQMMEofk6VSZgEyZ4Cu8/Ai+QXgpOmTJuYp2cR+aAZGMRM7rOKENzmss1/i/aDaJ5P6thO0s/C0OLJ3PV1/YTfZhtuvFLlOxjk7/LphmWTTPJ0B64+0mEocrEDQAAAABJRU5ErkJggg==' width='19'>
+,
+然后选择&quot;添加到主屏幕&quot;.
+</p>
+<img class='arrow' src='images/down-arrow.png'>
+</div>
+</div>
+<div class='cover building'>
+<div class='tip-wrapper'>
+<p class='tip'>
+正在生成 APK 文件
+</p>
+<div class='spinner'></div>
+</div>
+</div>
+</div>
+<div class='safe-mask' id='safemode'>
+<div class='indicator restore'>
+<div class='spinner'></div>
+<div class='text'>
+此操作可能需要几分钟，请您耐心等待...
+<span class='progress'>0%</span>
+</div>
+</div>
+<div class='indicator success'>
+<span class='icon'>
+<i class='fa fa-smile-o'></i>
+</span>
+<div class='text'>
+数据恢复成功，请刷新此页面。<a onclick="window.location.reload()"> 立刻刷新</a>
+</div>
+</div>
+</div>
+<div class='modal fade modal-small' id='safe-modal'>
+<div class='modal-dialog'>
+<div class='modal-content'>
+<div class='modal-body'>
+<img alt='' src='data:image/svg+xml;base64,Cjxzdmcgd2lkdGg9IjY0cHgiIGhlaWdodD0iNjRweCIgdmlld0JveD0iMTY4IDAgNjQgNjQiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQwLjMgKDMzODM5KSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9ImljX2Vycm9yX291dGxpbmUiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE2OC4wMDAwMDAsIDAuMDAwMDAwKSI+CiAgICAgICAgPGcgaWQ9Ikljb24tMjRweCI+CiAgICAgICAgICAgIDxwb2x5Z29uIGlkPSJTaGFwZSIgcG9pbnRzPSIwIDAgNjQgMCA2NCA2NCAwIDY0Ij48L3BvbHlnb24+CiAgICAgICAgICAgIDxwYXRoIGQ9Ik0yOS4zMzMzMzMzLDQwIEwzNC42NjY2NjY3LDQwIEwzNC42NjY2NjY3LDQ1LjMzMzMzMzMgTDI5LjMzMzMzMzMsNDUuMzMzMzMzMyBMMjkuMzMzMzMzMyw0MCBaIE0yOS4zMzMzMzMzLDE4LjY2NjY2NjcgTDM0LjY2NjY2NjcsMTguNjY2NjY2NyBMMzQuNjY2NjY2NywzNC42NjY2NjY3IEwyOS4zMzMzMzMzLDM0LjY2NjY2NjcgTDI5LjMzMzMzMzMsMTguNjY2NjY2NyBaIE0zMS45NzMzMzMzLDUuMzMzMzMzMzMgQzE3LjI1MzMzMzMsNS4zMzMzMzMzMyA1LjMzMzMzMzMzLDE3LjI4IDUuMzMzMzMzMzMsMzIgQzUuMzMzMzMzMzMsNDYuNzIgMTcuMjUzMzMzMyw1OC42NjY2NjY3IDMxLjk3MzMzMzMsNTguNjY2NjY2NyBDNDYuNzIsNTguNjY2NjY2NyA1OC42NjY2NjY3LDQ2LjcyIDU4LjY2NjY2NjcsMzIgQzU4LjY2NjY2NjcsMTcuMjggNDYuNzIsNS4zMzMzMzMzMyAzMS45NzMzMzMzLDUuMzMzMzMzMzMgTDMxLjk3MzMzMzMsNS4zMzMzMzMzMyBaIE0zMiw1My4zMzMzMzMzIEMyMC4yMTMzMzMzLDUzLjMzMzMzMzMgMTAuNjY2NjY2Nyw0My43ODY2NjY3IDEwLjY2NjY2NjcsMzIgQzEwLjY2NjY2NjcsMjAuMjEzMzMzMyAyMC4yMTMzMzMzLDEwLjY2NjY2NjcgMzIsMTAuNjY2NjY2NyBDNDMuNzg2NjY2NywxMC42NjY2NjY3IDUzLjMzMzMzMzMsMjAuMjEzMzMzMyA1My4zMzMzMzMzLDMyIEM1My4zMzMzMzMzLDQzLjc4NjY2NjcgNDMuNzg2NjY2Nyw1My4zMzMzMzMzIDMyLDUzLjMzMzMzMzMgTDMyLDUzLjMzMzMzMzMgWiIgaWQ9IlNoYXBlIiBmaWxsPSIjRjc1QjUwIj48L3BhdGg+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4='>
+<h5>非常抱歉！</h5>
+<p id='alert-msg'></p>
+<button class='btn btn-primary' onclick='window.location.reload()'>立即刷新</button>
+</div>
+</div>
+</div>
+</div>
+
+<div id='modals'>
+<div class='modal fade' id='warning-modal'></div>
+<div class='modal fade' id='sharing-modal'></div>
+<div class='modal fade' id='renew_modal'>
+<div class='modal-dialog'>
+<div class='modal-content'>
+<div class='modal-header'>
+<a class='close' data-dismiss='modal' href='#'>×</a>
+<h4>帐户已过期</h4>
+</div>
+<div class='modal-body'>
+<p class='limit collaboration'>
+这是一个协作项目，您需要联系项目所有人续费才能继续编辑，如果您拥有此项目，您也可以移除所有协作者后继续编辑
+</p>
+<p class='limit exporting comments'>
+这是一个收费功能，您需要先续费才能继续使用此功能，如您不是项目或团队所有人，请联系项目或团队所有人续费。
+</p>
+<p class='limit exceed_quota'>
+您的项目已超出免费版图片存储限制（100M），您需要升级到付费方案方可继续使用。
+</p>
+</div>
+<div class='modal-footer'>
+<a class='btn btn-primary' href='/account'>
+立即续费
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class='modal fade' id='chrome-warning'>
+<div class='modal-dialog'>
+<div class='modal-content'>
+<div class='modal-header'>
+<button aria-label='Close' class='close' data-dismiss='modal' type='button'>
+<span aria-hidden='true'>
+&times
+</span>
+</button>
+<h4 class='modal-title'>
+<i class='fa fa-warning'></i>
+警告
+</h4>
+</div>
+<div class='modal-body'>
+<p>
+我们发现您正在使用Chrome浏览器，要显示小于12像素的文字，您需要先修改Chrome 的默认最小字体大小设置，
+</p>
+<p>
+<a href='https://modao.cc/posts/63' target='blank'>
+设置方法请参看这篇文章。
+</a>
+</p>
+</div>
+<div class='modal-footer'>
+<button class='btn btn-default' data-dismiss='modal' type='button'>
+知道了！
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class='modal fade' id='cheating-warning'>
+<div class='modal-dialog'>
+<div class='modal-content'>
+<div class='modal-body'>
+<p>
+<b>任何要求微信转账，汇款，购买授权码的行为都是诈骗行为</b>。
+</p>
+<p>
+墨刀官方唯一购买渠道： <a href="https://modao.cc">modao.cc</a>，其它都是诈骗，损失墨刀概不负责。
+</p>
+<p class='tips'>
+付费用户可去除此提示。
+</p>
+</div>
+<div class='modal-footer'>
+<a aria-hidden='true' data-dismiss='modal' href='#'>
+知道了，我不会转账
+</a>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<script>
+  (function() {
+    var splash;
+  
+    window.MBLocale = 'zh-CN';
+  
+    window.I18N = {
+      "new_app": "创建应用",
+      "preview_demo": "预览模板",
+      "create": "创建",
+      "setting": "设置",
+      "update": "更新",
+      "are_you_sure": "您确定要执行此操作吗？",
+      "screen_remove_confirmation": "有\u003cb\u003e {children} 个子页面\u003c/b\u003e，此页面及其所有子页面都将被删除, 您确定吗？",
+      "cant_remove_screen": "您的应用需要至少一个页面。",
+      "last_updated": "最后更新",
+      "support": "技术支持",
+      "carrier": "中国移动",
+      "remove_parent_only": "不，只删除父页面",
+      "remove_all": "是的，删除父页面及所有子页面",
+      "w": {
+        "label": "文字",
+        "text_view": "多行文字",
+        "pg": "手势",
+        "lr": "链接区域",
+        "icon_button": "图标",
+        "image_view": "图片",
+        "button": "按钮",
+        "webpage": "网页",
+        "mtooltip": "聊天气泡",
+        "rounded_rect": "矩形",
+        "circle_rect": "圆形",
+        "hr": "直线",
+        "ve": "竖线",
+        "triangleb": "三角形1",
+        "triangletl": "三角形2",
+        "navigation_bar": "标题栏",
+        "search_bar": "搜索栏",
+        "tab_bar": "底栏",
+        "tab_item": "标签",
+        "rectangle": "列表项",
+        "switch": "开关",
+        "map_view": "地图",
+        "keyboard": "键盘",
+        "sticky": "批注",
+        "status_bar": "状态栏",
+        "panel": "母版实例",
+        "group": "群组",
+        "text_view_placeholder": "如果你无法简洁的表达你的想法，那只说明你还不够了解它。\n  -- 阿尔伯特·爱因斯坦",
+        "navbar_title": "标题",
+        "search": "搜索",
+        "mcheckbox2": "复选框",
+        "mradiobutton": "单选框",
+        "mtext_input": "单行输入",
+        "mtextarea": "多行输入",
+        "mselect": "下拉框",
+        "mfile_input": "文件选择"
+      },
+      "drag_to_link_screen": "拖动圆圈到右侧目标页面创建交互",
+      "password": "密码",
+      "screen": "页面",
+      "home": "主页",
+      "pay_with_alipay": "translation missing: zh-CN.pay_with_alipay",
+      "share": "分享",
+      "rotate": "旋转",
+      "back": "返回",
+      "return": "换行",
+      "login_from_desktop": "要创建新应用，请使用桌面浏览器登录墨刀。",
+      "install": "安装",
+      "tap": "请点击",
+      "public": "公开",
+      "private": "加密",
+      "add_to_home_screen": "然后选择\"添加到主屏幕\".",
+      "open_in_broswer": "translation missing: zh-CN.open_in_broswer",
+      "dup_app_confirmation": "确定要复制此项目吗？",
+      "data_lost_warning": "您还有数据没有保存，确定要退出吗？",
+      "inspector": {
+        "width": "宽",
+        "height": "高",
+        "font_size": "字体大小",
+        "line_height": "行高",
+        "bs": "边框宽度",
+        "ls": "边框样式",
+        "radius": "圆角半径",
+        "p": "等比例缩放图片",
+        "is": "图标大小",
+        "search": "搜索图标，比如: 设置",
+        "drop_image": "拖动图片到这里或者",
+        "click_to_upload": "点击选择图片上传",
+        "asset_search": "搜索图片",
+        "circularize": "圆形",
+        "squareize": "正方形",
+        "ro": "旋转角度",
+        "input_type": "键盘样式",
+        "z": "图层",
+        "o": "不透明度",
+        "ds": "阴影宽度",
+        "sc": "阴影颜色",
+        "ts": "阴影长度",
+        "tsc": "阴影颜色",
+        "bg": "背景色",
+        "tc": "前景色",
+        "bc": "边框颜色",
+        "f": "字体",
+        "padding": "边距",
+        "checked": "是否勾选",
+        "numeric": "数字键盘",
+        "fixed": "运行时固定位置，不随页面上下滑动",
+        "fixed_widget": "固定位置",
+        "not_fixed": "不固定",
+        "fixed_auto": "自动检测固定方向",
+        "fixed_top": "相对顶部固定",
+        "fixed_bottom": "相对底部固定",
+        "visible": "当前状态可见(快捷键：v)",
+        "placement": "箭头方向",
+        "offset": "箭头偏移",
+        "arrow_size": "箭头大小",
+        "blur": "模糊",
+        "grayscale": "灰度",
+        "sepia": "加温",
+        "brightness": "亮度",
+        "contrast": "对比度",
+        "hue_rotate": "色相",
+        "invert": "反色",
+        "saturate": "饱和度",
+        "reset": "重置"
+      },
+      "drag_to_create_screen": "拖动图片文件(可多张)到此处直接创建新页面",
+      "regenerate": "重新生成",
+      "got_it": "知道了！",
+      "network_error": "网络连接超时，无法保存您的操作，请检查您的网络并重新保存，取决于您的网络状况，如您上传的图片文件较大，可能需要多尝试几次。",
+      "unsupported": "不支持此文件类型",
+      "link_back": "返回上一页",
+      "drag_to_start": "拖动组件或图片文件到这里",
+      "home_screen": "主屏幕",
+      "signup_required": "您需要注册后才可使用此功能。",
+      "credential_required": "此应用受密码保护，请输入你的密码凭证：",
+      "state": "状态",
+      "new": "新建",
+      "widgets": "组件(1)",
+      "new_combo": "新组合",
+      "invalid_credential": "无效的密码，请刷新后重试。",
+      "icons": {
+        "all": "全部",
+        "basics": "常用",
+        "brand": "LOGO",
+        "text": "文字",
+        "directional": "方向箭头",
+        "form": "表单",
+        "video": "视频播放"
+      },
+      "app_device": "设备类型",
+      "app_type": "项目类型",
+      "icon": "图标",
+      "splash": "启动界面",
+      "size": "尺寸",
+      "icon_and_splash": "图标和启动图",
+      "tr": {
+        "none": "默认",
+        "slideleft": "右移入",
+        "slideright": "左移入",
+        "slidebottom": "下移入",
+        "slidetop": "上移入",
+        "leftmenu": "左菜单",
+        "rightmenu": "右菜单",
+        "leftdrawer": "左抽屉",
+        "rightdrawer": "右抽屉",
+        "slideleft2": "左弹入",
+        "slideright2": "右弹入",
+        "topin": "上弹入",
+        "popin": "下弹入",
+        "leftout": "左弹出",
+        "rightout": "右弹出",
+        "topout": "上弹出",
+        "popout": "下弹出"
+      },
+      "target": "目标页",
+      "png_only": "图标/启动屏幕只支持PNG文件",
+      "all_apps": "我的当前应用",
+      "inbox": "移入当前应用",
+      "sharing": "分享",
+      "owner_only": "只有所有者或管理员可以邀请新成员",
+      "sharing_url": "分享链接",
+      "toolbox": {
+        "ruler": "尺寸(R)",
+        "text": "文字(T)",
+        "palette": "外观(O)",
+        "icons": "图标(I)",
+        "uploader": "图片上传(U)",
+        "states": "选择一个状态创建母版链接"
+      },
+      "last_saved": "最后保存",
+      "archive": "移入归档应用",
+      "download": "下载",
+      "archived": "我的归档应用",
+      "del_app_confirmation": "您确定要删除此应用吗？",
+      "wait_for_saving": "此页面尚未保存，请您稍后再试。",
+      "fix_data": "我们检测到您上次退出时有未保存的修改，您希望现在保存吗？",
+      "upload_image": "上传图片",
+      "site_title": "墨刀",
+      "send_front": "置顶",
+      "send_back": "置底",
+      "forward": "向上",
+      "backward": "向下",
+      "wechat": "微信",
+      "choose_screen": "选择要跳转的页面",
+      "hdistribute": "水平等间距",
+      "vdistribute": "垂直等间距",
+      "hright": "右对齐",
+      "make_a_copy": "创建副本",
+      "more_options": "更多选项",
+      "unsaved": "未保存",
+      "all_saved": "全部操作已保存",
+      "timer": "定时器",
+      "no_timer": "未设置",
+      "cant_delete_template": "无法删除此母版，请先删除此母版的所有实例。",
+      "archive_confirmation": "您确定要归档此应用吗？",
+      "unarchive_confirmation": "您确定要取消归档此应用吗？",
+      "dc_confirm": "此页面有多个子页面，确定要复制所有子页面吗？",
+      "delete": "删除",
+      "expand_screen": "扩展屏幕高度",
+      "shrink_screen": "缩减屏幕高度",
+      "watch_tutorial": "观看教学视频",
+      "edit": "编辑",
+      "builtin_theme": "内置主题",
+      "custom_theme": "自定义主题",
+      "screen_bgcolor": "设置背景色",
+      "screen_bgimage": "设置背景图片",
+      "pg_tooltip": "全局手势",
+      "lr_tooltip": "可按住 Ctrl/Cmd 拖动鼠标快速创建链接区域",
+      "icon_tooltip": "图标",
+      "sticky_tooltip": "批注组件可显示在页面任意位置",
+      "menu_offset": "菜单偏移%",
+      "edit_demo": "编辑演示应用",
+      "create_new": "创建新应用",
+      "blank_app": "空白应用",
+      "template_app": "模板应用",
+      "basic": "基本",
+      "shapes": "形状",
+      "bars": "工具栏",
+      "others": "其它",
+      "webpage": "网页",
+      "drag_to_resize": "拖动调节页面高度",
+      "https_only": "双击编辑URL，处于安全考虑，外部网页组件仅支持https协议网站。",
+      "template_search": "搜索母版",
+      "no_archived_app": "小墨提示：还没有已归档的APP哦",
+      "archive_app": "你可以电脑访问墨刀归档APP",
+      "no_app": "你还没有创建应用",
+      "visit_via_computer": "你可以电脑访问墨刀",
+      "view_demo": "查看官方演示项目",
+      "sharing_password": "访问密码（可为空）",
+      "edit_screens": "编辑应用",
+      "state_link_tutorial": "观看母版链接教学视频",
+      "highlight_clickable": "点击空白区域时高亮可点击区域",
+      "type2search": "点此搜索",
+      "all_assets": "全部图片",
+      "current_assets": "当前项目",
+      "text_color": "文本颜色",
+      "search_doc": "搜索文档",
+      "combo_search": "搜索组合",
+      "all_combos": "所有组合",
+      "my_combos": "我的组合",
+      "builtin": "内置",
+      "width": "宽度",
+      "height": "高度",
+      "sticky": "批注",
+      "new_template": "新母版",
+      "auto_scale": "自动缩放",
+      "auto_scale_tip": "自动缩放以适配不同设备, 比如，勾选此选项后，为iPhone 5设计的组合在iPhone 6上将会放大1.17倍，在iPhone 6 plus上会放大1.29倍。",
+      "drag_widgets_2create": "拖动组件到这里创建组合",
+      "upgrade_prompt": "新版本已修复下载功能，请使用浏览器访问modao.cc下载。",
+      "embed": "嵌入",
+      "submit_app_proposal": "需要更多模板应用？\u003ca href=\"#page/forum/feature_request\" data-toggle=\"modal\"\u003e点这里告诉我们\u003c/a\u003e",
+      "shell_type": "边框类型",
+      "device_shell": "真实设备边框",
+      "default_shell": "默认黑边框",
+      "none_shell": "无边框",
+      "upload_own": "上传自定义图片",
+      "upload_icon": "上传新图标",
+      "upload_splash": "上传新启动图",
+      "app_name": "名称",
+      "free_trial": "14天免费试用，查看价格",
+      "restricted": "白名单",
+      "public_intro": "在个人主页显示此项目。",
+      "private_intro": "所有知道 URL 和密码的人都可查看。",
+      "restricted_intro": "只有我指定的人有权查看。 ",
+      "expired": "已过期",
+      "manage_collaborators": "管理团队成员",
+      "roles": {
+        "admin": "管理员",
+        "admin_desc": "所有权限",
+        "editor": "协作者",
+        "editor_desc": "修改,复制",
+        "viewer": "审阅者",
+        "viewer_desc": "查看,评论",
+        "owner": "所有者"
+      },
+      "invite": "邀请",
+      "pending": "等待",
+      "others_apps": "的应用",
+      "remove_me": "退出",
+      "invalid_post": "请输入内容或选择一个应用",
+      "cant_invite_self": "您已经在此项目中.",
+      "left": "左",
+      "right": "右",
+      "top": "上",
+      "down": "下",
+      "dip_help": "如何设置应用分辨率？",
+      "dblclick_to_edit": "双击编辑母版",
+      "name_copy": "副本",
+      "load_project": "正在读取项目数据，请稍候...",
+      "connect_to_push_server": "正在连接同步服务器，请稍候...",
+      "reconnect_push_server": "您已断开与服务器的连接, 正在重新连接，请稍候...",
+      "invalid_email": "无效的Email",
+      "cant_invite_yourself": "不能邀请自己",
+      "already_invited": "已经邀请过了",
+      "exceed_collaborator_limit": "您已超出当前计划所支持的协作者数目，需要升级帐户。",
+      "in_progress": "此操作可能需要几分钟，请您耐心等待...",
+      "screen_list": "页面列表",
+      "text_mode": "文本选择模式",
+      "link_mode": "链接模式",
+      "order_period": "付款时长",
+      "current_plan": "当前方案",
+      "next_billing_on": "当前方案到期",
+      "balance_left": "translation missing: zh-CN.balance_left",
+      "enterprise": "企业版",
+      "actually_pay": "translation missing: zh-CN.actually_pay",
+      "monthly": "月付",
+      "yearly": "年付",
+      "pro": "增强版",
+      "free": "免费版",
+      "standard": "标准版",
+      "startup": "创业版",
+      "invalid_comment": "评论内容不能为空",
+      "electron_download_alert": "点击没有反应？请先从浏览器进行下载，我们已知悉并正在解决此问题。",
+      "no_permission": "对不起，您没有权限编辑此母版，请双击实例进行编辑。",
+      "widget_list": "组件列表",
+      "team_name": "团队名称",
+      "edit_team": "编辑团队",
+      "team_icon": "团队图标",
+      "team_color": "团队颜色",
+      "icon_and_color": "图标和颜色",
+      "team": "团队",
+      "role": "角色",
+      "projects_count": "项目",
+      "screens_count": "页面",
+      "members_count": "团队成员",
+      "choose_team": "选择团队",
+      "no_joined_team": "您没有加入任何团队",
+      "my_assets": "我的图片",
+      "import_app": "导入个人应用",
+      "choose_app": "选择一个应用",
+      "dup_and_import": "复制此应用并导入副本",
+      "no_privilege": "对不起，您没有足够的权限执行此操作。",
+      "delete_projects_first": "删除团队前需要先删除所有项目。",
+      "refresh_token_confirmation": "此操作将会重新生成分享URL，使用旧URL将无法再访问此应用，确认要重新生成吗？",
+      "main_state": "默认状态",
+      "ani_name": "动效",
+      "ani_delay": "延迟",
+      "ani_duration": "动效时长",
+      "ani_count": "重复次数",
+      "animate": "动起来",
+      "none": "无",
+      "default": "默认",
+      "infinite": "无限循环",
+      "ani": {
+        "attention_seekers": "引起注意",
+        "bouncing_entrances": "弹入",
+        "flippers": "翻转",
+        "rotating_entrances": "旋转",
+        "sliding_entrances": "滑入",
+        "zoom_entrances": "缩放",
+        "specials": "其它",
+        "bounce": "弹跳",
+        "fadeIn": "渐现",
+        "flash": "闪烁",
+        "pulse": "跳动",
+        "rubberBand": "橡皮筋",
+        "shake": "抖动",
+        "swing": "摆动",
+        "tada": "哒啷",
+        "wobble": "摇晃",
+        "jello": "扭曲抖动",
+        "bounceIn": "弹入",
+        "bounceInDown": "上弹入",
+        "bounceInLeft": "左弹入",
+        "bounceInRight": "右弹入",
+        "bounceInUp": "下弹入",
+        "flipInX": "水平翻转",
+        "flipInY": "垂直翻转",
+        "spinning": "旋转（顺时针）",
+        "spinning-reverse": "旋转（逆时针）",
+        "rotateIn": "旋入",
+        "rotateInDownLeft": "左下旋转",
+        "rotateInDownRight": "右下旋转",
+        "rotateInUpLeft": "左下旋转",
+        "rotateInUpRight": "右上旋转",
+        "slideInDown": "上滑入",
+        "slideInLeft": "左滑入",
+        "slideInRight": "右滑入",
+        "slideInUp": "下滑入",
+        "zoomIn": "逐渐放大",
+        "zoomInDown": "从下放大",
+        "zoomInLeft": "从左放大",
+        "zoomInRight": "从右放大",
+        "zoomInUp": "从上放大",
+        "rollIn": "滚入",
+        "lightSpeedIn": "闪入"
+      },
+      "storage": "图片存储",
+      "whats_this": "这是什么？",
+      "exceed_screen_limit": "这个项目的组件及状态数量已超过 5 万，为了保证项目的打开速度，以及良好的编辑和运行时体验，您暂时不能再在此项目中添加新的页面及状态，我们建议您创建一个新的项目来完成这部分工作。",
+      "new_state": "新状态",
+      "tutorial": "教程",
+      "reset_target_screen": "重置目标页为初始状态",
+      "android.customize": "自定义安卓设备",
+      "unsaved_changes": "您的项目还有改动尚未保存，为保证导出内容无误，请先确保所有改动都已保存再重新导出。",
+      "transfer_screen": "转移此页面及子页面到其它项目",
+      "transfer": "转移",
+      "minputs": "输入组件",
+      "move": "移动",
+      "global_state": "全局状态",
+      "global_state_link_error": "全局状态不允许创建状态链接",
+      "input_types": {
+        "text": "文字",
+        "number": "数字",
+        "search": "搜索",
+        "password": "密码",
+        "date": "日期",
+        "time": "时间",
+        "datetime": "日期时间"
+      },
+      "move_tips": "创建一个副本，并移动副本到选定团队。",
+      "g": {
+        "tap": "单击",
+        "left": "左滑",
+        "right": "右滑",
+        "up": "上滑",
+        "down": "下滑",
+        "hold": "长按",
+        "dtap": "双击",
+        "shake": "摇一摇",
+        "timer": "定时器",
+        "vscroll": "垂直滚动"
+      },
+      "choose_move_dst": "选择移动位置",
+      "assets_manager": "上传/管理图片(A)",
+      "tags": "标签",
+      "tags_placeholder": "选择一个图片添加标签",
+      "name": "名称",
+      "choose_tag": "添加标签",
+      "create_tag": "创建新标签",
+      "insert_to_current": "插入图片到当前页面",
+      "create_new_screen": "使用此图片创建一个新页面",
+      "my_apps": "我的应用",
+      "team_apps": "我的团队",
+      "remove_clip": "移除图片裁切",
+      "update_colorset": "更新主题",
+      "colorset_tips": "提示：Shift-NUM套用主题，点选添加/更新主题",
+      "new_colorset": "添加主题",
+      "replace_image": "替换图片",
+      "cancel": "取消",
+      "duplicate_all": "是，连同子页面一起复制",
+      "duplicate_parent_only": "不，只复制父页面",
+      "coupon": "折扣码",
+      "new_flow": "新工作流",
+      "flow": "工作流",
+      "untitled_flow": "未命名工作流 - 双击进行编辑",
+      "ipa_building_starts": "已开始为您生成 iOS 应用程序，就绪后会发送邮件到您的邮箱，请注意查收。",
+      "ipa_device.not_configured": "您目前无可安装设备，请先联系团队管理员添加您的设备",
+      "no_ios_certificate": "没有可使用的苹果开发者证书，请联系墨刀客服添加证书。",
+      "go_to_account_settings": "前往帐户设置",
+      "ios_offline": "iOS IPA(离线)",
+      "import": "导入",
+      "import_template": "导入其它项目母版",
+      "choose_template_to_import": "选择要导入的母版",
+      "full_view": "全局工作流",
+      "edit_workflows": "编辑工作流",
+      "view_app": "直接查看",
+      "view_workflows": "查看工作流",
+      "expand_all": "展开所有父页",
+      "fold_all": "translation missing: zh-CN.fold_all",
+      "apply_coupon": "应用折扣",
+      "notifications": {
+        "all": "通知",
+        "view_all": "查看全部",
+        "load_more": "加载更多",
+        "request_permission": "若您要在这台电脑上使用墨刀，我们强烈建议您开启桌面通知功能。",
+        "enable_notification": "开启通知功能",
+        "ask_later": "下次再开启",
+        "never_ask_again": "不再询问",
+        "mark_all_as_read": "全部标记为已读",
+        "empty": "目前还没有通知"
+      },
+      "loading": "正在读取",
+      "untitled_editable": "未命名 - 双击进行编辑",
+      "got_message": "收到一条通知",
+      "buy": "购买",
+      "no_post": "还没有帖子，快来创建新帖吧",
+      "click2create": "点击创建",
+      "login_to_vote": "请登录后点赞",
+      "preview": {
+        "comment": {
+          "switch": "评论模式",
+          "tip": "双击预览区域添加新评论",
+          "tip_signin": "登录以添加新评论",
+          "tip_not_collaborator": "当前登录帐号不在协作名单中，请联系项目所有者获取权限，参与讨论",
+          "panel": " 条评论",
+          "thread_create": "评论",
+          "thread_delete_confirm": "永久删除本组评论？",
+          "thread_none": "无评论",
+          "thread_none_tip": "点击底部按钮或双击预览区添加新评论",
+          "thread_none_tip_signin": "使用下方按钮登录以添加新评论",
+          "comment_placeholder": "使用 Shift + Enter 换行",
+          "comment_create": "回复",
+          "comment_create_initial": "创建",
+          "comment_create_initial_title": "创建评论",
+          "comment_delete_confirm": "永久删除本条回复？",
+          "modify_edit": "编辑",
+          "modify_delete": "删除",
+          "reply": " 条回复",
+          "reply_none": "无回复",
+          "reply_none_tip": "请在下方添加评论内容以创建评论",
+          "reply_new": " 未读",
+          "reply_new_thread": "新",
+          "divider_new": "新回复",
+          "show_all_0": "展开",
+          "show_all_1": " 条回复",
+          "tag_edited": "修改",
+          "unfold": "展开"
+        },
+        "screen": {
+          "panel": "页面",
+          "total_page": "页面总数"
+        }
+      },
+      "web_signin": "登录",
+      "switch_to_free": "您的帐户过期后将会自动降级为免费方案，无需手动切换。",
+      "other_settings": "其它设置",
+      "new_post": "新帖子",
+      "choose_category": "选择分类",
+      "project": "项目",
+      "acl_moved_to_sharing": "应用访问权限设置已移至分享面板。",
+      "who_can_access": "谁可以访问此项目",
+      "unknown_error": "服务器发生未知错误，我们已经知晓此问题，并正在紧急修复中，为避免数据丢失，请您刷新此页面再进行后续操作。",
+      "new_version_detected": "检测到您已打开此页面\u003cspan\u003e超过10小时\u003c/span\u003e，目前墨刀长时间运行可能会产生一些无法预知的小问题，为了您的正常使用，请先刷新此页面，我们正在解决此问题，给您带来不便我们深感抱歉。",
+      "no_team": "您还没有团队",
+      "no_team_app": "此团队还没有任何应用",
+      "create_app_tips": "你可以在这里快速创建应用原型，或者通过模板创建。",
+      "create_team_tips": "点击这里创建一个团队",
+      "new_team": "创建团队",
+      "client_download": "macOS和Windows版客户端下载",
+      "tutorial_video": "墨刀教程和视频",
+      "created_time": "最早创建在前",
+      "updated_time": "最后修改在前",
+      "forum": "讨论区",
+      "all_teams": "所有团队",
+      "created_teams": "我创建的团队",
+      "joined_teams": "我加入的团队",
+      "team_intro": "点击了解团队功能",
+      "liked": "被赞",
+      "karma": "Karma",
+      "edit_profile": "编辑个人资料",
+      "public_projects": "公开作品",
+      "my_posts": "我的发表",
+      "his_posts": "Ta的发表",
+      "my_comments": "我的评论",
+      "his_comments": "Ta的评论",
+      "sharing_app": "分享原型",
+      "embed_app": "嵌入代码",
+      "permission": "权限",
+      "access_permission": "访问权限",
+      "preview_settings": "播放选项",
+      "embed_tips": "通过复制下面的代码将原型插入到网站或博客中。",
+      "view_in_browser": "跳过安装提示界面，直接在微信/浏览器内运行应用。",
+      "functional_widgets": "功能",
+      "locale_text": "EN",
+      "trial_expired": "试用过期",
+      "upgrade": "升级",
+      "renew": "续费",
+      "active": "有效",
+      "guide": "新手教程",
+      "feature_update": "功能更新",
+      "my_account": "我的帐户",
+      "signout": "登出",
+      "trial": "试用中",
+      "project_duplicated": "副本正在创建中，请稍候...",
+      "project_duplicating": "复制中, 请稍候...",
+      "project_duplicate_failed": "项目复制失败, 请重试",
+      "save": "保存",
+      "save_tip": "保存 (ctrl+S)",
+      "undo": "撤销",
+      "undo_tip": "撤销 (ctrl+Z)",
+      "redo": "重做",
+      "redo_tip": "重做 (ctrl+Y)",
+      "cut": "剪切",
+      "cut_tip": "剪切 (ctrl+X)",
+      "copy": "复制",
+      "copy_tip": "复制 (ctrl+C)",
+      "paste": "粘贴",
+      "paste_tip": "粘贴 (ctrl+V)",
+      "paste_directly": "到原位置",
+      "paste_to_point": "到当前位置",
+      "link_line": "链接",
+      "grid": "格线",
+      "ruler": "量尺",
+      "lock": "锁定",
+      "export": "导出",
+      "layout": "排列",
+      "align": "对齐",
+      "hleft": "左对齐",
+      "hleft_tip": "左对齐 (ctrl+alt+L)",
+      "hcenter": "水平居中",
+      "hcenter_tip": "水平居中 (ctrl+alt+C)",
+      "hright_tip": "右对齐 (ctrl+alt+R)",
+      "vtop": "顶对齐",
+      "vtop_tip": "顶对齐 (ctrl+alt+T)",
+      "vcenter": "垂直居中",
+      "vcenter_tip": "垂直居中 (ctrl+alt+V)",
+      "vbottom": "底对齐",
+      "vbottom_tip": "底对齐 (ctrl+alt+B)",
+      "distribute": "分布",
+      "hdistribute_tip": "水平等间距 (ctrl+shift+H)",
+      "vdistribute_tip": "垂直等间距 (ctrl+shift+U)",
+      "group": "组合",
+      "group_tip": "组合 (ctrl+G)",
+      "ungroup": "打散",
+      "ungroup_tip": "打散 (ctrl+U)",
+      "zoomin": "放大",
+      "zoomout": "缩小",
+      "launch": "运行",
+      "new_screen": "新页面",
+      "add_to": "添加至",
+      "templates": "母版",
+      "combos": "组合",
+      "custom_combo": "自定义组合",
+      "templates_2": "母版 (2)",
+      "combos_3": "组合 (3)",
+      "lock_widget": "锁定组件",
+      "unlock": "解锁",
+      "widgets_here": "此处的组件",
+      "error_project": "当前项目因为数据异常无法打开, 请点击确认将其删除",
+      "recover": "恢复",
+      "no_deleted_screens": "回收站里空空如也",
+      "transh_can": "回收站",
+      "screen_transh_can": "页面回收站",
+      "project_transh_can": "项目回收站",
+      "account": {
+        "pay_success": "支付成功",
+        "reload_after_countdown": "\u003cspan style=\"color: #F55D54\"\u003e\u003c/span\u003e 秒后自动跳转",
+        "switch_plan": "切换方案",
+        "renew": "续费",
+        "pay_with_paypal": "使用Paypal支付",
+        "pay_with_alipay": "使用支付宝支付",
+        "pay_with_wechat": "使用微信支付",
+        "scan_with_wechat": "使用微信扫一扫付款",
+        "provided_by_pingxx": "本支付服务由 Ping++ 提供",
+        "reload": "立即刷新",
+        "balance_left": "剩余时长抵现",
+        "actually_pay": "实际应付",
+        "save_17": "节省17%",
+        "new_plan": "新方案",
+        "new_billing_date": "新续费日",
+        "payment_methods": "支付方式",
+        "wechat_pay": "微信支付",
+        "confirm_pay": "确认支付",
+        "pay": "支付",
+        "discount": "当前折扣"
+      }
+    };
+  
+    splash = document.getElementById('splashimg');
+  
+    if (splash && window.innerWidth > window.innerHeight) {
+      splash.style.width = window.innerHeight + 'px';
+      splash.style.height = window.innerWidth + 'px';
+      splash.style.top = (0 - window.innerWidth) + 'px';
+    }
+  
+  }).call(this);
+</script>
+<link href='css/font-awesome.min.css' media='screen' rel='stylesheet'>
+<link href='css/roboto.css' media='screen' rel='stylesheet'>
+<link href='css/mb-font.css' media='screen' rel='stylesheet'>
+
+<link rel="stylesheet" media="screen" href="assets/sharing-68aa14ba6fa3ebf94fc3d4747dfa2200.css" />
+<link rel="stylesheet" media="screen" href="webpack/preview-0ecfbb0ef29698b9f3a97f5de2c24ce4.css" />
+<script>
+  document.getElementsByClassName("indicator")[0].style.height = '30%';
+  var MBServer = "modao.cc";
+</script>
+<script src="webpack/vendor-14f855672b35195d1150.js"></script>
+<script src="assets/sharing-fddcde009a71428a51e7714a4b37b04b.js"></script>
+<script src="webpack/preview-f2fc37f0a98f31ee19ff.js"></script>
+<script>
+  (function() {
+    MB.play = function() {
+      return MB.load('XeRESLVbrtnTvfENP0rKER2R7T5LzOv', false, '');
+    };
+  
+    $(function() {
+      if (!window.navigator.standalone && !false && MB.isMobile() && !MB.isLocal()) {
+        MB.initWechat(null);
+        return MB.initInstall();
+      } else if (MB.isPhantom()) {
+        return $("body").addClass('phantom');
+      } else {
+        return MB.play();
+      }
+    });
+  
+  }).call(this);
+</script>
+
+</body>
+</html>
+<script>window.MBData=
+{"templates":[],"project":{"owner_id":378987,"owner_plan":"startup","owner_name":"百里清墨","owner_email":"zjwrjgc@163.com","owner_avatar":"/images/avatar.png","limitation":5,"screens_count":9,"cid":"pE6572BE1C31488637468642","team_cid":null,"name":"HCI","updated_at":"2017-03-12T08:36:24Z","created_at":"2017-03-04T14:25:42Z","access":"private","access_token":"XeRESLVbrtnTvfENP0rKER2R7T5LzOv","version":"v2","icon":"/images/icon_retina.png","splash":null,"width":1440,"height":1024,"device":"web","model":"desktop","scale":100,"archived":false,"template":false,"timestamp":"1489307784","combo":false,"behavior":"inherit","master":false,"builtin":false,"auto_scale":false,"parent_cid":null,"host_cid":null,"clones":0,"shell_type":"none","password":"","wechat":false,"highlight":true,"expired":false,"validated":false,"duplicating":false,"slack_web_hook_url":null},"screens":[{"cid":"s78E59971E71488637525083","project_cid":"pE6572BE1C31488637468642","parent_cid":null,"expanded":true,"name":"主页","orientation":"portrait","position":1,"width":1440,"height":1024,"hh":null,"fh":null,"bgcolor":"#F0F0F2","bgimage":null,"deleter_name":null,"deleted_at":null,"artboard_id":null,"artboard_asset_id":null},{"cid":"s8138CAE8281488638091708","project_cid":"pE6572BE1C31488637468642","parent_cid":"s78E59971E71488637525083","expanded":false,"name":"榜单","orientation":"portrait","position":1,"width":1440,"height":1024,"hh":null,"fh":null,"bgcolor":"#F0F0F2","bgimage":null,"deleter_name":null,"deleted_at":null,"artboard_id":null,"artboard_asset_id":null},{"cid":"s570C1978E51488638098815","project_cid":"pE6572BE1C31488637468642","parent_cid":"s78E59971E71488637525083","expanded":false,"name":"大盘","orientation":"portrait","position":3,"width":1440,"height":1024,"hh":null,"fh":null,"bgcolor":"#F0F0F2","bgimage":null,"deleter_name":null,"deleted_at":null,"artboard_id":null,"artboard_asset_id":null},{"cid":"s24F50D710D1489173124577","project_cid":"pE6572BE1C31488637468642","parent_cid":"s78E59971E71488637525083","expanded":false,"name":"关注","orientation":"portrait","position":4,"width":1440,"height":1024,"hh":null,"fh":null,"bgcolor":"#F0F0F2","bgimage":null,"deleter_name":null,"deleted_at":null,"artboard_id":null,"artboard_asset_id":null},{"cid":"s01299EC01F1489173128260","project_cid":"pE6572BE1C31488637468642","parent_cid":"s78E59971E71488637525083","expanded":true,"name":"资讯","orientation":"portrait","position":7,"width":1440,"height":1024,"hh":null,"fh":null,"bgcolor":"#F0F0F2","bgimage":null,"deleter_name":null,"deleted_at":null,"artboard_id":null,"artboard_asset_id":null},{"cid":"s9E869B93601489241051937","project_cid":"pE6572BE1C31488637468642","parent_cid":"s78E59971E71488637525083","expanded":true,"name":"搜索","orientation":"portrait","position":5,"width":1440,"height":1024,"hh":null,"fh":null,"bgcolor":"#F0F0F2","bgimage":null,"deleter_name":null,"deleted_at":null,"artboard_id":null,"artboard_asset_id":null},{"cid":"sBF395574581489241060918","project_cid":"pE6572BE1C31488637468642","parent_cid":"s78E59971E71488637525083","expanded":false,"name":"登陆","orientation":"portrait","position":6,"width":1440,"height":1024,"hh":null,"fh":null,"bgcolor":"#F0F0F2","bgimage":null,"deleter_name":null,"deleted_at":null,"artboard_id":null,"artboard_asset_id":null},{"cid":"sAA4C3FD2EC1489241779906","project_cid":"pE6572BE1C31488637468642","parent_cid":"s9E869B93601489241051937","expanded":false,"name":"股票详情","orientation":"portrait","position":1,"width":1440,"height":1024,"hh":null,"fh":null,"bgcolor":"#F0F0F2","bgimage":null,"deleter_name":null,"deleted_at":null,"artboard_id":null,"artboard_asset_id":null},{"cid":"s8C13CC9D351489247898845","project_cid":"pE6572BE1C31488637468642","parent_cid":"s01299EC01F1489173128260","expanded":false,"name":"文章","orientation":"portrait","position":1,"width":1440,"height":1024,"hh":null,"fh":null,"bgcolor":"#F0F0F2","bgimage":null,"deleter_name":null,"deleted_at":null,"artboard_id":null,"artboard_asset_id":null}],"widgets":[{"cid":"w241C8CFEA61488638142753","screen_cid":"s78E59971E71488637525083","timestamp":34412807,"v":true,"name":"search_bar","left":1130.0,"top":0.0,"width":250.0,"height":45.0,"gid":"l13AD07DB381489250153369","locked":false,"text":"搜索","fs":14,"ha":"left","z":5,"th":"","bg":"","tc":"","bc":"","o":100,"ds":0,"sc":"#aaaaaa","ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wFDC85FD3031489137112852","screen_cid":"s78E59971E71488637525083","timestamp":34412811,"v":true,"name":"hr","left":0.0,"top":-5.0,"width":1440.0,"height":10.0,"gid":null,"locked":false,"z":5,"th":"","bc":"","ls":0,"ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w7403DF6E891489137127781","screen_cid":"s78E59971E71488637525083","timestamp":34412815,"v":true,"name":"hr","left":0.0,"top":40.0,"width":1440.0,"height":10.0,"gid":null,"locked":false,"z":5,"th":"","bc":"","ls":0,"ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w2572F1B5711489137179414","screen_cid":"s78E59971E71488637525083","timestamp":34412822,"v":true,"name":"button","left":440.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l98A4B3689E1489307008334","locked":false,"text":"推荐榜单","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w3F5F6E58561489137215784","screen_cid":"s78E59971E71488637525083","timestamp":34412829,"v":true,"name":"button","left":570.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l00B08D20351489250129589","locked":false,"text":"大盘近况","fs":14,"br":0,"bs":1,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wC0298B71551489137224354","screen_cid":"s78E59971E71488637525083","timestamp":34412833,"v":true,"name":"button","left":700.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l913D7258A71489250136885","locked":false,"text":"我的关注","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wCCEC49182F1489172679299","screen_cid":"s78E59971E71488637525083","timestamp":34412835,"v":true,"name":"button","left":830.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l2DE3BCF9A91489250145261","locked":false,"text":"新闻资讯","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w6FC0BA49411489172993412","screen_cid":"s78E59971E71488637525083","timestamp":34412876,"v":true,"name":"button","left":1380.0,"top":0.0,"width":60.0,"height":45.0,"gid":"l3B75AB112C1489250161713","locked":false,"text":"","fs":14,"br":0,"bs":1,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"user","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w116810E97F1489306526805","screen_cid":"s78E59971E71488637525083","timestamp":34414007,"v":true,"name":"image_view","left":210.0,"top":230.0,"width":190.0,"height":250.0,"gid":"lFF8D7BDD061489307041799","locked":false,"bs":0,"br":0,"image":null,"z":5,"th":"","bg":"","bc":"","tc":"","o":100,"p":true,"ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null,"filter":""},{"cid":"w040B3F515A1489306537622","screen_cid":"s78E59971E71488637525083","timestamp":34414010,"v":true,"name":"image_view","left":480.0,"top":230.0,"width":190.0,"height":250.0,"gid":"l5DE4168BE71489307045911","locked":false,"bs":0,"br":0,"image":null,"z":5,"th":"","bg":"","bc":"","tc":"","o":100,"p":true,"ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null,"filter":""},{"cid":"wE4DC477B1E1489306546272","screen_cid":"s78E59971E71488637525083","timestamp":34414015,"v":true,"name":"image_view","left":750.0,"top":230.0,"width":190.0,"height":250.0,"gid":"lB7050239B01489307052264","locked":false,"bs":0,"br":0,"image":null,"z":5,"th":"","bg":"","bc":"","tc":"","o":100,"p":true,"ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null,"filter":""},{"cid":"w52D1F15B061489306552833","screen_cid":"s78E59971E71488637525083","timestamp":34414018,"v":true,"name":"image_view","left":1020.0,"top":230.0,"width":190.0,"height":250.0,"gid":"lB97CCE57491489307057604","locked":false,"bs":0,"br":0,"image":null,"z":5,"th":"","bg":"","bc":"","tc":"","o":100,"p":true,"ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null,"filter":""},{"cid":"wD3B83C3F981489306763991","screen_cid":"s78E59971E71488637525083","timestamp":34414042,"v":true,"name":"image_view","left":370.0,"top":0.0,"width":70.0,"height":45.0,"gid":null,"locked":false,"bs":0,"br":0,"image":null,"z":5,"th":"","bg":"","bc":"","tc":"","o":100,"p":true,"ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null,"filter":""},{"cid":"w23FFFCFE5A1489307072206","screen_cid":"s78E59971E71488637525083","timestamp":34414068,"v":true,"name":"button","left":240.0,"top":135.0,"width":130.0,"height":45.0,"gid":"l2C2AE82D851489307072203","locked":false,"text":"推荐榜单","fs":21,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w4EA84D69DD1489307084082","screen_cid":"s78E59971E71488637525083","timestamp":34414073,"v":true,"name":"button","left":510.0,"top":135.0,"width":130.0,"height":45.0,"gid":"l00A9ED475C1489307084080","locked":false,"text":"大盘近况","fs":21,"br":0,"bs":1,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wABC5D7130F1489307281934","screen_cid":"s78E59971E71488637525083","timestamp":34414100,"v":true,"name":"button","left":780.0,"top":135.0,"width":130.0,"height":45.0,"gid":"lB7425B1A4F1489307281931","locked":false,"text":"我的关注","fs":21,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wF671C8307D1489307294148","screen_cid":"s78E59971E71488637525083","timestamp":34414104,"v":true,"name":"button","left":1050.0,"top":135.0,"width":130.0,"height":45.0,"gid":"l0FAE959DC21489307294146","locked":false,"text":"新闻资讯","fs":21,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w02599924A21489173589243","screen_cid":"s8138CAE8281488638091708","timestamp":34412910,"v":true,"name":"search_bar","left":1130.0,"top":0.0,"width":250.0,"height":45.0,"gid":"lA9767F38301489250208351","locked":false,"text":"搜索","fs":14,"ha":"left","z":5,"th":"","bg":"","tc":"","bc":"","o":100,"ds":0,"sc":"#aaaaaa","ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w7E1F60AF2A1489173589251","screen_cid":"s8138CAE8281488638091708","timestamp":34412914,"v":true,"name":"hr","left":0.0,"top":-5.0,"width":1440.0,"height":10.0,"gid":null,"locked":false,"z":5,"th":"","bc":"","ls":0,"ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w3D0EBA5A581489173589257","screen_cid":"s8138CAE8281488638091708","timestamp":34412918,"v":true,"name":"hr","left":0.0,"top":40.0,"width":1440.0,"height":10.0,"gid":null,"locked":false,"z":5,"th":"","bc":"","ls":0,"ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wB928775F341489173589262","screen_cid":"s8138CAE8281488638091708","timestamp":34412922,"v":true,"name":"button","left":440.0,"top":0.0,"width":130.0,"height":45.0,"gid":null,"locked":false,"text":"推荐榜单","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"#d1d1d1","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w076674111F1489173589269","screen_cid":"s8138CAE8281488638091708","timestamp":34412926,"v":true,"name":"button","left":570.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l74942F75231489250180359","locked":false,"text":"大盘近况","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w297508D84D1489173589276","screen_cid":"s8138CAE8281488638091708","timestamp":34412930,"v":true,"name":"button","left":700.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l6A0DF1B4491489250190627","locked":false,"text":"我的关注","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w341E0433271489173589281","screen_cid":"s8138CAE8281488638091708","timestamp":34412934,"v":true,"name":"button","left":830.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l69978EDCF31489250196407","locked":false,"text":"新闻资讯","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w74C9274CE31489173589285","screen_cid":"s8138CAE8281488638091708","timestamp":34412938,"v":true,"name":"button","left":1380.0,"top":0.0,"width":60.0,"height":45.0,"gid":"l7BFADFC13E1489250212790","locked":false,"text":"","fs":14,"br":0,"bs":1,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"user","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wEB75B9519C1489250790560","screen_cid":"s8138CAE8281488638091708","timestamp":34413848,"v":true,"name":"tab_item","left":370.0,"top":140.0,"width":80.0,"height":45.0,"gid":null,"locked":false,"text":"3日涨幅","is":24,"icon":"th","fs":15,"z":5,"th":"","bg":"#d4d4d4","tc":"","o":100,"ds":0,"sc":"#aaaaaa","fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w6667B15D571489251220314","screen_cid":"s8138CAE8281488638091708","timestamp":34413857,"v":true,"name":"tab_item","left":450.0,"top":140.0,"width":80.0,"height":45.0,"gid":null,"locked":false,"text":"2周涨幅","is":24,"icon":"th","fs":15,"z":5,"th":"","bg":"#b8b8b8","tc":"","o":100,"ds":0,"sc":"#aaaaaa","fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wE62C7EFF0A1489251288023","screen_cid":"s8138CAE8281488638091708","timestamp":34413863,"v":true,"name":"rounded_rect","left":370.0,"top":185.0,"width":590.0,"height":475.0,"gid":null,"locked":false,"text":"","fs":14,"br":0,"bs":1,"ha":"center","va":"middle","z":5,"lh":20,"th":"","td":"normal","bo":0,"i":0,"bg":"transparent","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w8F9C314C5E1489251345464","screen_cid":"s8138CAE8281488638091708","timestamp":34413871,"v":true,"name":"label","left":400.0,"top":220.0,"width":230.0,"height":45.0,"gid":"lF2278B657B1489251792250","locked":false,"text":"<p>+**.**%XXXX(sh******)</p>","fs":23,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":33,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wF7665E0ECB1489251390605","screen_cid":"s8138CAE8281488638091708","timestamp":34413879,"v":true,"name":"label","left":703.0,"top":215.0,"width":225.0,"height":45.0,"gid":null,"locked":false,"text":"<p>-**.**%XXXX(sh******)</p>","fs":23,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":33,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w21BDD79E951489251536238","screen_cid":"s8138CAE8281488638091708","timestamp":34413893,"v":true,"name":"label","left":400.0,"top":290.0,"width":230.0,"height":45.0,"gid":null,"locked":false,"text":"<p>+**.**%XXXX(sh******)</p>","fs":23,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":33,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w5679E28FE71489251547429","screen_cid":"s8138CAE8281488638091708","timestamp":34413897,"v":true,"name":"label","left":400.0,"top":360.0,"width":230.0,"height":45.0,"gid":null,"locked":false,"text":"<p>+**.**%XXXX(sh******)</p>","fs":23,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":33,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w75EA8147491489251558221","screen_cid":"s8138CAE8281488638091708","timestamp":34413903,"v":true,"name":"label","left":400.0,"top":430.0,"width":230.0,"height":45.0,"gid":null,"locked":false,"text":"<p>+**.**%XXXX(sh******)</p>","fs":23,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":33,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w1BA78ABF561489251576579","screen_cid":"s8138CAE8281488638091708","timestamp":34413910,"v":true,"name":"label","left":400.0,"top":500.0,"width":230.0,"height":45.0,"gid":null,"locked":false,"text":"<p>+**.**%XXXX(sh******)</p>","fs":23,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":33,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w1A44007E751489251587405","screen_cid":"s8138CAE8281488638091708","timestamp":34413914,"v":true,"name":"label","left":400.0,"top":570.0,"width":230.0,"height":45.0,"gid":null,"locked":false,"text":"<p>+**.**%XXXX(sh******)</p>","fs":23,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":33,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w2801A78B131489251605698","screen_cid":"s8138CAE8281488638091708","timestamp":34413921,"v":true,"name":"label","left":703.0,"top":290.0,"width":225.0,"height":45.0,"gid":null,"locked":false,"text":"<p>-**.**%XXXX(sh******)</p>","fs":23,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":33,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w83363D6BAB1489251618865","screen_cid":"s8138CAE8281488638091708","timestamp":34413928,"v":true,"name":"label","left":703.0,"top":360.0,"width":225.0,"height":45.0,"gid":null,"locked":false,"text":"<p>-**.**%XXXX(sh******)</p>","fs":23,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":33,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w9668718FD21489251634030","screen_cid":"s8138CAE8281488638091708","timestamp":34413934,"v":true,"name":"label","left":703.0,"top":430.0,"width":225.0,"height":45.0,"gid":null,"locked":false,"text":"<p>-**.**%XXXX(sh******)</p>","fs":23,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":33,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wB435BB92CB1489251640587","screen_cid":"s8138CAE8281488638091708","timestamp":34413938,"v":true,"name":"label","left":703.0,"top":500.0,"width":225.0,"height":45.0,"gid":null,"locked":false,"text":"<p>-**.**%XXXX(sh******)</p>","fs":23,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":33,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w64DF5D96EA1489251650897","screen_cid":"s8138CAE8281488638091708","timestamp":34413945,"v":true,"name":"label","left":703.0,"top":570.0,"width":225.0,"height":45.0,"gid":null,"locked":false,"text":"<p>-**.**%XXXX(sh******)</p>","fs":23,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":33,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w757FCFEE951489251687510","screen_cid":"s8138CAE8281488638091708","timestamp":34413950,"v":true,"name":"tab_item","left":530.0,"top":140.0,"width":80.0,"height":45.0,"gid":null,"locked":false,"text":"1月涨跌比","is":24,"icon":"th","fs":15,"z":5,"th":"","bg":"#b8b8b8","tc":"","o":100,"ds":0,"sc":"#aaaaaa","fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wFF5033FBCD1489307383364","screen_cid":"s8138CAE8281488638091708","timestamp":34414128,"v":true,"name":"image_view","left":370.0,"top":0.0,"width":70.0,"height":45.0,"gid":"lE47FEE711D1489307419949","locked":false,"bs":0,"br":0,"image":null,"z":5,"th":"","bg":"","bc":"","tc":"","o":100,"p":true,"ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null,"filter":""},{"cid":"w8B1562F4C21489307828100","screen_cid":"s8138CAE8281488638091708","timestamp":34414308,"v":true,"name":"label","left":370.0,"top":65.0,"width":590.0,"height":45.0,"gid":null,"locked":false,"text":"<p>您可以根据不同的需求查看股票排行：</p>","fs":20,"br":0,"bs":0,"ha":"left","va":"middle","z":5,"th":"","lh":29,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w3545508AAD1489173669420","screen_cid":"s570C1978E51488638098815","timestamp":34412970,"v":true,"name":"search_bar","left":1130.0,"top":0.0,"width":250.0,"height":45.0,"gid":"l071CC62E111489250261730","locked":false,"text":"搜索","fs":14,"ha":"left","z":5,"th":"","bg":"","tc":"","bc":"","o":100,"ds":0,"sc":"#aaaaaa","ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wAC55055D6B1489173669427","screen_cid":"s570C1978E51488638098815","timestamp":34412974,"v":true,"name":"hr","left":0.0,"top":-5.0,"width":1440.0,"height":10.0,"gid":null,"locked":false,"z":5,"th":"","bc":"","ls":0,"ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w5981623C8D1489173669431","screen_cid":"s570C1978E51488638098815","timestamp":34412978,"v":true,"name":"hr","left":0.0,"top":40.0,"width":1440.0,"height":10.0,"gid":null,"locked":false,"z":5,"th":"","bc":"","ls":0,"ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w256936ADB91489173669437","screen_cid":"s570C1978E51488638098815","timestamp":34412982,"v":true,"name":"button","left":440.0,"top":0.0,"width":130.0,"height":45.0,"gid":"lB1206335661489250230836","locked":false,"text":"推荐榜单","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w697DE1D5E81489173669443","screen_cid":"s570C1978E51488638098815","timestamp":34412986,"v":true,"name":"button","left":570.0,"top":0.0,"width":130.0,"height":45.0,"gid":null,"locked":false,"text":"大盘近况","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"#d1d1d1","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w20F68A603E1489173669450","screen_cid":"s570C1978E51488638098815","timestamp":34412990,"v":true,"name":"button","left":700.0,"top":0.0,"width":130.0,"height":45.0,"gid":"lB2B7CD48171489250246871","locked":false,"text":"我的关注","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w649E35AC321489173669455","screen_cid":"s570C1978E51488638098815","timestamp":34412994,"v":true,"name":"button","left":830.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l008A27CB201489250253232","locked":false,"text":"新闻资讯","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w3B584CA8E01489173669461","screen_cid":"s570C1978E51488638098815","timestamp":34412998,"v":true,"name":"button","left":1380.0,"top":0.0,"width":60.0,"height":45.0,"gid":"l135AD816A51489250268547","locked":false,"text":"","fs":14,"br":0,"bs":1,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"user","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wD849BD04B61489244474239","screen_cid":"s570C1978E51488638098815","timestamp":34413534,"v":true,"name":"label","left":365.0,"top":230.0,"width":710.0,"height":360.0,"gid":null,"locked":false,"text":"<p>一个月大盘K线图</p>","fs":16,"br":0,"bs":1,"ha":"center","va":"middle","z":5,"th":"","lh":23,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wC6022926BA1489244507920","screen_cid":"s570C1978E51488638098815","timestamp":34413538,"v":true,"name":"label","left":610.0,"top":45.0,"width":200.0,"height":95.0,"gid":null,"locked":false,"text":"<p>今日大盘数据</p>","fs":26,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":38,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w513634B74C1489244681387","screen_cid":"s570C1978E51488638098815","timestamp":34413548,"v":true,"name":"text_view","left":530.0,"top":140.0,"width":545.0,"height":85.0,"gid":null,"locked":false,"text":"<p>今开：0.00  最高：0.00  成交量：0手</p><p>昨收：0.00  最低：0.00  成交额：0.00万元 </p>","fs":20,"br":0,"bs":0,"ha":"left","va":"middle","z":5,"th":"","lh":29,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"w84F97693C21489244681400","screen_cid":"s570C1978E51488638098815","timestamp":34413552,"v":true,"name":"label","left":365.0,"top":140.0,"width":160.0,"height":85.0,"gid":null,"locked":false,"text":"<p>+0.00%</p>","fs":40,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"red","lh":58,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"#e51c23","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w9D33694B311489307407916","screen_cid":"s570C1978E51488638098815","timestamp":34414140,"v":true,"name":"image_view","left":370.0,"top":0.0,"width":70.0,"height":45.0,"gid":"lA6D2CB63321489307428740","locked":false,"bs":0,"br":0,"image":null,"z":5,"th":"","bg":"","bc":"","tc":"","o":100,"p":true,"ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null,"filter":""},{"cid":"wC3ADDA224F1489173694412","screen_cid":"s24F50D710D1489173124577","timestamp":34413018,"v":true,"name":"search_bar","left":1130.0,"top":0.0,"width":250.0,"height":45.0,"gid":"lDE47233FAA1489250296703","locked":false,"text":"搜索","fs":14,"ha":"left","z":5,"th":"","bg":"","tc":"","bc":"","o":100,"ds":0,"sc":"#aaaaaa","ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w4FB1411F3F1489173694420","screen_cid":"s24F50D710D1489173124577","timestamp":34413022,"v":true,"name":"hr","left":0.0,"top":-5.0,"width":1440.0,"height":10.0,"gid":null,"locked":false,"z":5,"th":"","bc":"","ls":0,"ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w843829474E1489173694425","screen_cid":"s24F50D710D1489173124577","timestamp":34413026,"v":true,"name":"hr","left":0.0,"top":40.0,"width":1440.0,"height":10.0,"gid":null,"locked":false,"z":5,"th":"","bc":"","ls":0,"ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wF9BDB3E19E1489173694430","screen_cid":"s24F50D710D1489173124577","timestamp":34413030,"v":true,"name":"button","left":440.0,"top":0.0,"width":130.0,"height":45.0,"gid":"lE7216C695A1489250280787","locked":false,"text":"推荐榜单","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wF2037EFBB91489173694436","screen_cid":"s24F50D710D1489173124577","timestamp":34413034,"v":true,"name":"button","left":570.0,"top":0.0,"width":130.0,"height":45.0,"gid":"lF8937FF1341489250285580","locked":false,"text":"大盘近况","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w00DACDEF8D1489173694445","screen_cid":"s24F50D710D1489173124577","timestamp":34413038,"v":true,"name":"button","left":700.0,"top":0.0,"width":130.0,"height":45.0,"gid":null,"locked":false,"text":"我的关注","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"#d1d1d1","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wF20F030A931489173694454","screen_cid":"s24F50D710D1489173124577","timestamp":34413042,"v":true,"name":"button","left":830.0,"top":0.0,"width":130.0,"height":45.0,"gid":"lD17264BD871489250290933","locked":false,"text":"新闻资讯","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wC3D25EAAAF1489173694461","screen_cid":"s24F50D710D1489173124577","timestamp":34413046,"v":true,"name":"button","left":1380.0,"top":0.0,"width":60.0,"height":45.0,"gid":"l7018E72A731489250301528","locked":false,"text":"","fs":14,"br":0,"bs":1,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"user","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w8FF64EE5A81489251745195","screen_cid":"s24F50D710D1489173124577","timestamp":34413958,"v":true,"name":"label","left":370.0,"top":140.0,"width":230.0,"height":45.0,"gid":"l9191BACD0B1489251844868","locked":false,"text":"<p>+**.**%XXXX(sh******)</p>","fs":23,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":33,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w3AF1EDB51E1489251754198","screen_cid":"s24F50D710D1489173124577","timestamp":34413963,"v":true,"name":"label","left":370.0,"top":260.0,"width":230.0,"height":45.0,"gid":null,"locked":false,"text":"<p>+**.**%XXXX(sh******)</p>","fs":23,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":33,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wC8DABC6F651489251825605","screen_cid":"s24F50D710D1489173124577","timestamp":34413969,"v":true,"name":"label","left":370.0,"top":380.0,"width":230.0,"height":45.0,"gid":null,"locked":false,"text":"<p>+**.**%XXXX(sh******)</p>","fs":23,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":33,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wF204B4FF0F1489251938367","screen_cid":"s24F50D710D1489173124577","timestamp":34413976,"v":true,"name":"text_view","left":370.0,"top":185.0,"width":530.0,"height":60.0,"gid":null,"locked":false,"text":"如果你无法简洁的表达你的想法，那只说明你还不够了解它。\n  -- 阿尔伯特·爱因斯坦","fs":13,"br":0,"bs":0,"ha":"left","va":"top","z":5,"th":"","lh":18,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"wB70C73A24C1489251950322","screen_cid":"s24F50D710D1489173124577","timestamp":34413981,"v":true,"name":"text_view","left":370.0,"top":305.0,"width":530.0,"height":60.0,"gid":null,"locked":false,"text":"如果你无法简洁的表达你的想法，那只说明你还不够了解它。\n  -- 阿尔伯特·爱因斯坦","fs":13,"br":0,"bs":0,"ha":"left","va":"top","z":5,"th":"","lh":18,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"w07A0F2E2AB1489251956100","screen_cid":"s24F50D710D1489173124577","timestamp":34413985,"v":true,"name":"text_view","left":370.0,"top":425.0,"width":530.0,"height":60.0,"gid":null,"locked":false,"text":"如果你无法简洁的表达你的想法，那只说明你还不够了解它。\n  -- 阿尔伯特·爱因斯坦","fs":13,"br":0,"bs":0,"ha":"left","va":"top","z":5,"th":"","lh":18,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"wE36391CCBC1489253096742","screen_cid":"s24F50D710D1489173124577","timestamp":34413994,"v":true,"name":"button","left":1039.5,"top":145.0,"width":123.0,"height":30.0,"gid":null,"locked":false,"text":"取消关注","fs":14,"br":8,"bs":1,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wC85666E03E1489253592827","screen_cid":"s24F50D710D1489173124577","timestamp":34414000,"v":true,"name":"button","left":1040.0,"top":275.0,"width":123.0,"height":30.0,"gid":null,"locked":false,"text":"取消关注","fs":14,"br":8,"bs":1,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wC7813924D61489253613182","screen_cid":"s24F50D710D1489173124577","timestamp":34414006,"v":true,"name":"button","left":1040.0,"top":385.0,"width":123.0,"height":30.0,"gid":null,"locked":false,"text":"取消关注","fs":14,"br":8,"bs":1,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w8226DE7EBC1489307434493","screen_cid":"s24F50D710D1489173124577","timestamp":34414147,"v":true,"name":"image_view","left":370.0,"top":0.0,"width":70.0,"height":45.0,"gid":"l05E17561DB1489307441410","locked":false,"bs":0,"br":0,"image":null,"z":5,"th":"","bg":"","bc":"","tc":"","o":100,"p":true,"ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null,"filter":""},{"cid":"wE34713FA8A1489307750823","screen_cid":"s24F50D710D1489173124577","timestamp":34414227,"v":true,"name":"label","left":370.0,"top":80.0,"width":130.0,"height":45.0,"gid":null,"locked":false,"text":"关注列表：","fs":20,"br":0,"bs":0,"ha":"left","va":"middle","z":5,"th":"","lh":29,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wD6228EFD461489244861663","screen_cid":"s01299EC01F1489173128260","timestamp":34413573,"v":true,"name":"text_view","left":350.0,"top":185.0,"width":710.0,"height":25.0,"gid":null,"locked":false,"text":"<p>内容摘要</p>","fs":17,"br":0,"bs":0,"ha":"left","va":"top","z":5,"th":"light","lh":25,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"#101010","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"wDBA372DB301489244861673","screen_cid":"s01299EC01F1489173128260","timestamp":34413577,"v":true,"name":"text_view","left":350.0,"top":140.0,"width":280.0,"height":45.0,"gid":"lA9B182C8B51489250499254","locked":false,"text":"<p>企业资讯1</p>","fs":20,"br":0,"bs":0,"ha":"left","va":"middle","z":5,"th":"","lh":29,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"w7ED92E7C721489244861683","screen_cid":"s01299EC01F1489173128260","timestamp":34413581,"v":true,"name":"text_view","left":350.0,"top":285.0,"width":710.0,"height":25.0,"gid":null,"locked":false,"text":"<p>内容摘要<br></p>","fs":17,"br":0,"bs":0,"ha":"left","va":"top","z":5,"th":"light","lh":25,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"#101010","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"wBCD58DF6071489244861693","screen_cid":"s01299EC01F1489173128260","timestamp":34413585,"v":true,"name":"text_view","left":350.0,"top":240.0,"width":280.0,"height":45.0,"gid":null,"locked":false,"text":"<p>企业资讯2</p>","fs":20,"br":0,"bs":0,"ha":"left","va":"middle","z":5,"th":"","lh":29,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"w59A3F834B11489244887507","screen_cid":"s01299EC01F1489173128260","timestamp":34413593,"v":true,"name":"text_view","left":350.0,"top":385.0,"width":710.0,"height":25.0,"gid":null,"locked":false,"text":"<p>内容摘要<br></p>","fs":17,"br":0,"bs":0,"ha":"left","va":"top","z":5,"th":"light","lh":25,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"#101010","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"w11A98BD5681489244887518","screen_cid":"s01299EC01F1489173128260","timestamp":34413597,"v":true,"name":"text_view","left":350.0,"top":340.0,"width":280.0,"height":45.0,"gid":null,"locked":false,"text":"<p>股票分析1</p>","fs":20,"br":0,"bs":0,"ha":"left","va":"middle","z":5,"th":"","lh":29,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"wD2DB8F8CCB1489244911422","screen_cid":"s01299EC01F1489173128260","timestamp":34413609,"v":true,"name":"text_view","left":350.0,"top":485.0,"width":710.0,"height":25.0,"gid":null,"locked":false,"text":"<p>内容摘要<br></p>","fs":17,"br":0,"bs":0,"ha":"left","va":"top","z":5,"th":"light","lh":25,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"#101010","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"wE59DDBB2F11489244911431","screen_cid":"s01299EC01F1489173128260","timestamp":34413613,"v":true,"name":"text_view","left":350.0,"top":440.0,"width":280.0,"height":45.0,"gid":null,"locked":false,"text":"<p>股票分析2</p>","fs":20,"br":0,"bs":0,"ha":"left","va":"middle","z":5,"th":"","lh":29,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"w3AA34052AD1489244937735","screen_cid":"s01299EC01F1489173128260","timestamp":34413618,"v":true,"name":"label","left":536.0,"top":60.0,"width":330.0,"height":45.0,"gid":null,"locked":false,"text":"<p> 您可以在此查看最新的企业新闻及专家分析</p>","fs":17,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":25,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w30419261891489173723729","screen_cid":"s01299EC01F1489173128260","timestamp":34413086,"v":true,"name":"button","left":1380.0,"top":0.0,"width":60.0,"height":45.0,"gid":"l7E8DA684CF1489250493914","locked":false,"text":"","fs":14,"br":0,"bs":1,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"user","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wCD5C000AA71489173723722","screen_cid":"s01299EC01F1489173128260","timestamp":34413082,"v":true,"name":"button","left":830.0,"top":0.0,"width":130.0,"height":45.0,"gid":null,"locked":false,"text":"新闻资讯","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"#d1d1d1","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wF41720071D1489173723716","screen_cid":"s01299EC01F1489173128260","timestamp":34413078,"v":true,"name":"button","left":700.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l89A3A67AFC1489250482111","locked":false,"text":"我的关注","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w1C167B2D961489173723710","screen_cid":"s01299EC01F1489173128260","timestamp":34413074,"v":true,"name":"button","left":570.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l54ED8C16A11489250475593","locked":false,"text":"大盘近况","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w08E5123A4A1489173723702","screen_cid":"s01299EC01F1489173128260","timestamp":34413070,"v":true,"name":"button","left":440.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l68BDA86CDC1489250471920","locked":false,"text":"推荐榜单","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wEB213923811489173723697","screen_cid":"s01299EC01F1489173128260","timestamp":34413066,"v":true,"name":"hr","left":0.0,"top":40.0,"width":1440.0,"height":10.0,"gid":null,"locked":false,"z":5,"th":"","bc":"","ls":0,"ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wBBE300C14B1489173723692","screen_cid":"s01299EC01F1489173128260","timestamp":34413062,"v":true,"name":"hr","left":0.0,"top":-5.0,"width":1440.0,"height":10.0,"gid":null,"locked":false,"z":5,"th":"","bc":"","ls":0,"ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w721C7992861489173723684","screen_cid":"s01299EC01F1489173128260","timestamp":34413058,"v":true,"name":"search_bar","left":1130.0,"top":0.0,"width":250.0,"height":45.0,"gid":"lEC487E89931489250487384","locked":false,"text":"搜索","fs":14,"ha":"left","z":5,"th":"","bg":"","tc":"","bc":"","o":100,"ds":0,"sc":"#aaaaaa","ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w523A9AF6BE1489307557473","screen_cid":"s01299EC01F1489173128260","timestamp":34414204,"v":true,"name":"image_view","left":370.0,"top":0.0,"width":70.0,"height":45.0,"gid":"l88FD3BF5431489307563803","locked":false,"bs":0,"br":0,"image":null,"z":5,"th":"","bg":"","bc":"","tc":"","o":100,"p":true,"ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null,"filter":""},{"cid":"wF8FC94DF801489241130473","screen_cid":"s9E869B93601489241051937","timestamp":34413128,"v":true,"name":"search_bar","left":1130.0,"top":0.0,"width":250.0,"height":45.0,"gid":null,"locked":false,"text":"搜索","fs":14,"ha":"left","z":5,"th":"","bg":"","tc":"","bc":"","o":100,"ds":0,"sc":"#aaaaaa","ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w061124FFEB1489241130486","screen_cid":"s9E869B93601489241051937","timestamp":34413132,"v":true,"name":"hr","left":0.0,"top":-5.0,"width":1440.0,"height":10.0,"gid":null,"locked":false,"z":5,"th":"","bc":"","ls":0,"ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w384E726A571489241130493","screen_cid":"s9E869B93601489241051937","timestamp":34413136,"v":true,"name":"hr","left":0.0,"top":40.0,"width":1440.0,"height":10.0,"gid":null,"locked":false,"z":5,"th":"","bc":"","ls":0,"ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w7F8A2E64491489241130501","screen_cid":"s9E869B93601489241051937","timestamp":34413140,"v":true,"name":"button","left":440.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l7D2667C3671489250314352","locked":false,"text":"推荐榜单","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wA1048D01191489241130509","screen_cid":"s9E869B93601489241051937","timestamp":34413144,"v":true,"name":"button","left":570.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l1E10DD3A681489250322598","locked":false,"text":"大盘近况","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w1784F816221489241130516","screen_cid":"s9E869B93601489241051937","timestamp":34413148,"v":true,"name":"button","left":700.0,"top":0.0,"width":130.0,"height":45.0,"gid":"lE1CC2604381489250327278","locked":false,"text":"我的关注","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w07B7087A6C1489241130523","screen_cid":"s9E869B93601489241051937","timestamp":34413152,"v":true,"name":"button","left":830.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l9449B4AB8A1489250331534","locked":false,"text":"新闻资讯","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w4DAFD65B4A1489241130532","screen_cid":"s9E869B93601489241051937","timestamp":34413156,"v":true,"name":"button","left":1380.0,"top":0.0,"width":60.0,"height":45.0,"gid":"l07EB736BF91489250347114","locked":false,"text":"","fs":14,"br":0,"bs":1,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"user","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w51BE20CCBA1489241718301","screen_cid":"s9E869B93601489241051937","timestamp":34413289,"v":true,"name":"label","left":210.0,"top":125.0,"width":81.0,"height":35.0,"gid":null,"locked":false,"text":"搜索结果：","fs":16,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":23,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w973EFEDE1F1489242364451","screen_cid":"s9E869B93601489241051937","timestamp":34413316,"v":true,"name":"text_view","left":210.0,"top":240.0,"width":1170.0,"height":25.0,"gid":"lA0ECDCE17E1489242948291","locked":false,"text":"<p>开盘：0.00 收盘：0.00 最高：0.00 最低：0.00 涨幅：0.00%<br></p>","fs":17,"br":0,"bs":0,"ha":"left","va":"top","z":5,"th":"light","lh":25,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"#101010","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"w665310FF891489242682540","screen_cid":"s9E869B93601489241051937","timestamp":34413330,"v":true,"name":"label","left":210.0,"top":195.0,"width":280.0,"height":45.0,"gid":"l12001EC70A1489242756656","locked":false,"text":"浦发银行(sh600000)\n","fs":20,"br":0,"bs":0,"ha":"left","va":"middle","z":5,"th":"","lh":29,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w846B8CCF021489242815777","screen_cid":"s9E869B93601489241051937","timestamp":34413342,"v":true,"name":"text_view","left":210.0,"top":345.0,"width":1170.0,"height":25.0,"gid":null,"locked":false,"text":"<p>开盘：0.00 收盘：0.00 最高：0.00 最低：0.00 涨幅：0.00%<br></p>","fs":17,"br":0,"bs":0,"ha":"left","va":"top","z":5,"th":"light","lh":25,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"#101010","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"wE8286A949C1489242815786","screen_cid":"s9E869B93601489241051937","timestamp":34413346,"v":true,"name":"text_view","left":210.0,"top":300.0,"width":280.0,"height":45.0,"gid":null,"locked":false,"text":"<p>邯郸钢铁(sh600001)\n</p>","fs":20,"br":0,"bs":0,"ha":"left","va":"middle","z":5,"th":"","lh":29,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"wC3CBE68B031489242859074","screen_cid":"s9E869B93601489241051937","timestamp":34413352,"v":true,"name":"text_view","left":210.0,"top":455.0,"width":1170.0,"height":25.0,"gid":null,"locked":false,"text":"<p>开盘：0.00 收盘：0.00 最高：0.00 最低：0.00 涨幅：0.00%<br></p>","fs":17,"br":0,"bs":0,"ha":"left","va":"top","z":5,"th":"light","lh":25,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"#101010","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"w26ED1106E51489242859082","screen_cid":"s9E869B93601489241051937","timestamp":34413356,"v":true,"name":"text_view","left":210.0,"top":410.0,"width":280.0,"height":45.0,"gid":null,"locked":false,"text":"<p>齐鲁石化(sh600002)\n</p>","fs":20,"br":0,"bs":0,"ha":"left","va":"middle","z":5,"th":"","lh":29,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"w347DF0F4101489242891848","screen_cid":"s9E869B93601489241051937","timestamp":34413364,"v":true,"name":"text_view","left":210.0,"top":555.0,"width":1170.0,"height":25.0,"gid":null,"locked":false,"text":"<p>开盘：0.00 收盘：0.00 最高：0.00 最低：0.00 涨幅：0.00%<br></p>","fs":17,"br":0,"bs":0,"ha":"left","va":"top","z":5,"th":"light","lh":25,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"#101010","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"wC01902BEBD1489242891857","screen_cid":"s9E869B93601489241051937","timestamp":34413368,"v":true,"name":"text_view","left":210.0,"top":510.0,"width":280.0,"height":45.0,"gid":null,"locked":false,"text":"<p>ST东北高(sh600003)\n</p>","fs":20,"br":0,"bs":0,"ha":"left","va":"middle","z":5,"th":"","lh":29,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"wE1FBA174A31489307465398","screen_cid":"s9E869B93601489241051937","timestamp":34414164,"v":true,"name":"image_view","left":380.0,"top":0.0,"width":70.0,"height":45.0,"gid":"lDD5A9448F21489307500797","locked":false,"bs":0,"br":0,"image":null,"z":5,"th":"","bg":"","bc":"","tc":"","o":100,"p":true,"ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null,"filter":""},{"cid":"wE2245E119C1489241111321","screen_cid":"sBF395574581489241060918","timestamp":34413088,"v":true,"name":"search_bar","left":1130.0,"top":0.0,"width":250.0,"height":45.0,"gid":"lFB4A98FDA21489250446949","locked":false,"text":"搜索","fs":14,"ha":"left","z":5,"th":"","bg":"","tc":"","bc":"","o":100,"ds":0,"sc":"#aaaaaa","ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wC64BD66A471489241111334","screen_cid":"sBF395574581489241060918","timestamp":34413092,"v":true,"name":"hr","left":0.0,"top":-5.0,"width":1440.0,"height":10.0,"gid":null,"locked":false,"z":5,"th":"","bc":"","ls":0,"ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wF2C5E9289E1489241111342","screen_cid":"sBF395574581489241060918","timestamp":34413096,"v":true,"name":"hr","left":0.0,"top":40.0,"width":1440.0,"height":10.0,"gid":null,"locked":false,"z":5,"th":"","bc":"","ls":0,"ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wF0CD24672D1489241111348","screen_cid":"sBF395574581489241060918","timestamp":34413100,"v":true,"name":"button","left":440.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l3C59941A461489250421204","locked":false,"text":"推荐榜单","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w1683F8B2061489241111358","screen_cid":"sBF395574581489241060918","timestamp":34413104,"v":true,"name":"button","left":570.0,"top":0.0,"width":130.0,"height":45.0,"gid":"lD9A72098F21489250427932","locked":false,"text":"大盘近况","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w04901434331489241111366","screen_cid":"sBF395574581489241060918","timestamp":34413108,"v":true,"name":"button","left":700.0,"top":0.0,"width":130.0,"height":45.0,"gid":"lB3D6F0164D1489250436768","locked":false,"text":"我的关注","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w76DFBA7E8E1489241111377","screen_cid":"sBF395574581489241060918","timestamp":34413112,"v":true,"name":"button","left":830.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l9B75D082C51489250442495","locked":false,"text":"新闻资讯","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wD7A0D77B211489241111385","screen_cid":"sBF395574581489241060918","timestamp":34413116,"v":true,"name":"button","left":1380.0,"top":0.0,"width":60.0,"height":45.0,"gid":null,"locked":false,"text":"","fs":14,"br":0,"bs":1,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"user","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wA36FBF1C7D1489241159619","screen_cid":"sBF395574581489241060918","timestamp":34413167,"v":true,"name":"label","left":440.0,"top":155.0,"width":70.0,"height":45.0,"gid":null,"locked":false,"text":"<p>用户名：</p>","fs":16,"br":0,"bs":0,"ha":"left","va":"middle","z":5,"th":"","lh":23,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wC42CBA62B41489241198112","screen_cid":"sBF395574581489241060918","timestamp":34413172,"v":true,"name":"label","left":440.0,"top":235.0,"width":70.0,"height":45.0,"gid":null,"locked":false,"text":"<p>密    码：</p>","fs":16,"br":0,"bs":0,"ha":"left","va":"middle","z":5,"th":"","lh":23,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wCE52931BB91489241288314","screen_cid":"sBF395574581489241060918","timestamp":34413182,"v":true,"name":"mtext_input","left":530.0,"top":160.0,"width":200.0,"height":35.0,"gid":null,"locked":false,"text":"请输入用户名","fs":14,"br":8,"bs":1,"ha":"left","z":5,"th":"","bg":"","bc":"","tc":"","o":100,"ds":0,"sc":"#aaaaaa","td":"normal","bo":0,"i":0,"ls":0,"fixed":false,"fixed_type":1,"input_type":"text"},{"cid":"wC000819C311489241379166","screen_cid":"sBF395574581489241060918","timestamp":34413191,"v":true,"name":"mtext_input","left":530.0,"top":240.0,"width":200.0,"height":35.0,"gid":null,"locked":false,"text":"请输入密码","fs":14,"br":8,"bs":1,"ha":"left","z":5,"th":"","bg":"","bc":"","tc":"","o":100,"ds":0,"sc":"#aaaaaa","td":"normal","bo":0,"i":0,"ls":0,"fixed":false,"fixed_type":1,"input_type":"text"},{"cid":"w1450744ACC1489241412426","screen_cid":"sBF395574581489241060918","timestamp":34413196,"v":true,"name":"button","left":530.0,"top":340.0,"width":80.0,"height":30.0,"gid":"l6F000BBFBB1489250464399","locked":false,"text":"登陆","fs":14,"br":8,"bs":1,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w5B4F7759181489307527996","screen_cid":"sBF395574581489241060918","timestamp":34414192,"v":true,"name":"image_view","left":370.0,"top":0.0,"width":70.0,"height":45.0,"gid":"lB38E770CB41489307536966","locked":false,"bs":0,"br":0,"image":null,"z":5,"th":"","bg":"","bc":"","tc":"","o":100,"p":true,"ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null,"filter":""},{"cid":"wE82BA053021489243015532","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413382,"v":true,"name":"search_bar","left":1130.0,"top":0.0,"width":250.0,"height":45.0,"gid":"lA58CE3C5531489250381613","locked":false,"text":"搜索","fs":14,"ha":"left","z":5,"th":"","bg":"","tc":"","bc":"","o":100,"ds":0,"sc":"#aaaaaa","ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w28CE61924E1489243015541","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413386,"v":true,"name":"hr","left":0.0,"top":-5.0,"width":1440.0,"height":10.0,"gid":null,"locked":false,"z":5,"th":"","bc":"","ls":0,"ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w9BA4B8E1F61489243015547","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413390,"v":true,"name":"hr","left":0.0,"top":40.0,"width":1440.0,"height":10.0,"gid":null,"locked":false,"z":5,"th":"","bc":"","ls":0,"ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w8518AC003D1489243015552","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413394,"v":true,"name":"button","left":440.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l3F2529BEFD1489250357299","locked":false,"text":"推荐榜单","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w6DCB4E49121489243015560","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413398,"v":true,"name":"button","left":570.0,"top":0.0,"width":130.0,"height":45.0,"gid":"lB4ECCE20BE1489250361019","locked":false,"text":"大盘近况","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w6F530232441489243015570","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413402,"v":true,"name":"button","left":700.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l3D29C040591489250364984","locked":false,"text":"我的关注","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wDBF5A15C391489243015577","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413406,"v":true,"name":"button","left":830.0,"top":0.0,"width":130.0,"height":45.0,"gid":"lFF449BF7301489250372842","locked":false,"text":"新闻资讯","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wF3418EB64D1489243015587","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413410,"v":true,"name":"button","left":1380.0,"top":0.0,"width":60.0,"height":45.0,"gid":"lA48F6BB2251489250387192","locked":false,"text":"","fs":14,"br":0,"bs":1,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"user","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w3DE007C41B1489243043051","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413421,"v":true,"name":"label","left":582.5,"top":50.0,"width":275.0,"height":80.0,"gid":null,"locked":false,"text":"浦发银行(sh600000)","fs":30,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":44,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w886BC0F7211489243182161","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413434,"v":true,"name":"label","left":350.0,"top":160.0,"width":155.0,"height":80.0,"gid":null,"locked":false,"text":"<p>+0.00%</p>","fs":40,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"red","lh":58,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"#e51c23","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w2E039F0C2E1489243125907","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413428,"v":true,"name":"text_view","left":510.0,"top":155.0,"width":550.0,"height":105.0,"gid":null,"locked":false,"text":"<p>今开：0.00  最高：0.00  成交量：0手           市盈率：0.00</p><p>昨收：0.00  最低：0.00  成交额：0.00万元  市净率：0.00</p><p>换手率：0.00%</p>","fs":20,"br":0,"bs":0,"ha":"left","va":"middle","z":5,"th":"","lh":29,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"w543014F6EA1489243865823","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413455,"v":true,"name":"label","left":350.0,"top":270.0,"width":710.0,"height":250.0,"gid":null,"locked":false,"text":"K线图","fs":16,"br":0,"bs":1,"ha":"center","va":"middle","z":5,"th":"","lh":23,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wBBD1E1539C1489243939098","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413465,"v":true,"name":"label","left":350.0,"top":520.0,"width":710.0,"height":160.0,"gid":null,"locked":false,"text":"<p>macd图/KDJ图</p>","fs":16,"br":0,"bs":1,"ha":"center","va":"middle","z":5,"th":"","lh":23,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wADC5ECA5F91489243983904","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413474,"v":true,"name":"tab_item","left":350.0,"top":680.0,"width":80.0,"height":45.0,"gid":null,"locked":false,"text":"MACD","is":24,"icon":"area-chart","fs":16,"z":5,"th":"","bg":"#d4d4d4","tc":"#444444","o":100,"ds":0,"sc":"#aaaaaa","fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wC4256E07341489244192823","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413489,"v":true,"name":"tab_item","left":430.0,"top":680.0,"width":80.0,"height":45.0,"gid":null,"locked":false,"text":"KDJ","is":24,"icon":"area-chart","fs":16,"z":5,"th":"","bg":"#b8b8b8","tc":"#444444","o":100,"ds":0,"sc":"#aaaaaa","fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wD6DCE18FD81489244352764","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413503,"v":true,"name":"text_view","left":350.0,"top":805.0,"width":710.0,"height":25.0,"gid":null,"locked":false,"text":"<p>内容摘要</p>","fs":17,"br":0,"bs":0,"ha":"left","va":"top","z":5,"th":"light","lh":25,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"#101010","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"w2FC12FCE2D1489244352776","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413507,"v":true,"name":"text_view","left":350.0,"top":760.0,"width":280.0,"height":45.0,"gid":"lC2A5DB6DC41489250397441","locked":false,"text":"<p>企业资讯1</p>","fs":20,"br":0,"bs":0,"ha":"left","va":"middle","z":5,"th":"","lh":29,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"w77F295E67A1489244352789","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413511,"v":true,"name":"text_view","left":350.0,"top":905.0,"width":710.0,"height":25.0,"gid":null,"locked":false,"text":"<p>内容摘要<br></p>","fs":17,"br":0,"bs":0,"ha":"left","va":"top","z":5,"th":"light","lh":25,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"#101010","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"wB33ED93AA81489244352798","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413515,"v":true,"name":"text_view","left":350.0,"top":860.0,"width":280.0,"height":45.0,"gid":null,"locked":false,"text":"<p>企业资讯2</p>","fs":20,"br":0,"bs":0,"ha":"left","va":"middle","z":5,"th":"","lh":29,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null},{"cid":"w9375A098EE1489252935963","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34413990,"v":true,"name":"button","left":850.0,"top":120.0,"width":80.0,"height":30.0,"gid":null,"locked":false,"text":"关注","fs":14,"br":8,"bs":1,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wD9B140E6AE1489307484664","screen_cid":"sAA4C3FD2EC1489241779906","timestamp":34414178,"v":true,"name":"image_view","left":370.0,"top":0.0,"width":70.0,"height":45.0,"gid":"l97828B76D51489307492763","locked":false,"bs":0,"br":0,"image":null,"z":5,"th":"","bg":"","bc":"","tc":"","o":100,"p":true,"ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null,"filter":""},{"cid":"wC59AFDEFAD1489247938099","screen_cid":"s8C13CC9D351489247898845","timestamp":34413648,"v":true,"name":"search_bar","left":1130.0,"top":0.0,"width":250.0,"height":45.0,"gid":"l58967B4CE41489250648179","locked":false,"text":"搜索","fs":14,"ha":"left","z":5,"th":"","bg":"","tc":"","bc":"","o":100,"ds":0,"sc":"#aaaaaa","ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w7D5740946A1489247938109","screen_cid":"s8C13CC9D351489247898845","timestamp":34413652,"v":true,"name":"hr","left":0.0,"top":-5.0,"width":1440.0,"height":10.0,"gid":null,"locked":false,"z":5,"th":"","bc":"","ls":0,"ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w2889AB49AC1489247938116","screen_cid":"s8C13CC9D351489247898845","timestamp":34413656,"v":true,"name":"hr","left":0.0,"top":40.0,"width":1440.0,"height":10.0,"gid":null,"locked":false,"z":5,"th":"","bc":"","ls":0,"ro":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w38BA70D63F1489247938123","screen_cid":"s8C13CC9D351489247898845","timestamp":34413660,"v":true,"name":"button","left":440.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l04E1FC29991489250628564","locked":false,"text":"推荐榜单","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w8E833F0C531489247938132","screen_cid":"s8C13CC9D351489247898845","timestamp":34413664,"v":true,"name":"button","left":570.0,"top":0.0,"width":140.0,"height":45.0,"gid":"l22A03C0CF61489250633028","locked":false,"text":"大盘近况","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w8F0FC52CA21489247938143","screen_cid":"s8C13CC9D351489247898845","timestamp":34413668,"v":true,"name":"button","left":710.0,"top":0.0,"width":130.0,"height":45.0,"gid":"lBCD8CD3A2D1489250637378","locked":false,"text":"我的关注","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wCBE96AC1B61489247938150","screen_cid":"s8C13CC9D351489247898845","timestamp":34413672,"v":true,"name":"button","left":840.0,"top":0.0,"width":130.0,"height":45.0,"gid":"l5A6E9CEF721489250642146","locked":false,"text":"新闻资讯","fs":14,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wDB5442D2D71489247938159","screen_cid":"s8C13CC9D351489247898845","timestamp":34413676,"v":true,"name":"button","left":1380.0,"top":0.0,"width":60.0,"height":45.0,"gid":"l9D49DE9AAE1489250652500","locked":false,"text":"","fs":14,"br":0,"bs":1,"ha":"center","va":"middle","z":5,"th":"","td":"normal","bo":0,"i":0,"bg":"","bc":"#ffffff","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"ls":0,"icon":"user","is":14,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"w23A717B7C41489249640306","screen_cid":"s8C13CC9D351489247898845","timestamp":34413695,"v":true,"name":"label","left":600.0,"top":45.0,"width":220.0,"height":75.0,"gid":null,"locked":false,"text":"<p>企业资讯1</p>","fs":30,"br":0,"bs":0,"ha":"center","va":"middle","z":5,"th":"","lh":44,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0"},{"cid":"wFB5D7D6E891489250758427","screen_cid":"s8C13CC9D351489247898845","timestamp":34413843,"v":true,"name":"text_view","left":360.0,"top":160.0,"width":690.0,"height":460.0,"gid":null,"locked":false,"text":"如果你无法简洁的表达你的想法，那只说明你还不够了解它。\n  -- 阿尔伯特·爱因斯坦","fs":13,"br":0,"bs":0,"ha":"left","va":"top","z":5,"th":"","lh":18,"td":"normal","bo":0,"i":0,"bg":"","bc":"","tc":"","o":100,"ts":0,"tsc":"#aaaaaa","ds":0,"sc":"#aaaaaa","ro":0,"padding":0,"ls":0,"fixed":false,"fixed_type":1,"ani_name":"none","ani_delay":"0","ani_count":"1","ani_duration":"0","clip":null}],"links":[{"cid":"l00B08D20351489250129589","screen_cid":"s78E59971E71488637525083","target_cid":"s570C1978E51488638098815","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l913D7258A71489250136885","screen_cid":"s78E59971E71488637525083","target_cid":"s24F50D710D1489173124577","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l2DE3BCF9A91489250145261","screen_cid":"s78E59971E71488637525083","target_cid":"s01299EC01F1489173128260","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l13AD07DB381489250153369","screen_cid":"s78E59971E71488637525083","target_cid":"s9E869B93601489241051937","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l3B75AB112C1489250161713","screen_cid":"s78E59971E71488637525083","target_cid":"sBF395574581489241060918","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l98A4B3689E1489307008334","screen_cid":"s78E59971E71488637525083","target_cid":"s8138CAE8281488638091708","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lFF8D7BDD061489307041799","screen_cid":"s78E59971E71488637525083","target_cid":"s8138CAE8281488638091708","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l5DE4168BE71489307045911","screen_cid":"s78E59971E71488637525083","target_cid":"s570C1978E51488638098815","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lB7050239B01489307052264","screen_cid":"s78E59971E71488637525083","target_cid":"s24F50D710D1489173124577","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lB97CCE57491489307057604","screen_cid":"s78E59971E71488637525083","target_cid":"s01299EC01F1489173128260","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l2C2AE82D851489307072203","screen_cid":"s78E59971E71488637525083","target_cid":"s8138CAE8281488638091708","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l00A9ED475C1489307084080","screen_cid":"s78E59971E71488637525083","target_cid":"s570C1978E51488638098815","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lB7425B1A4F1489307281931","screen_cid":"s78E59971E71488637525083","target_cid":"s24F50D710D1489173124577","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l0FAE959DC21489307294146","screen_cid":"s78E59971E71488637525083","target_cid":"s01299EC01F1489173128260","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l74942F75231489250180359","screen_cid":"s8138CAE8281488638091708","target_cid":"s570C1978E51488638098815","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l6A0DF1B4491489250190627","screen_cid":"s8138CAE8281488638091708","target_cid":"s24F50D710D1489173124577","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l69978EDCF31489250196407","screen_cid":"s8138CAE8281488638091708","target_cid":"s01299EC01F1489173128260","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lA9767F38301489250208351","screen_cid":"s8138CAE8281488638091708","target_cid":"s9E869B93601489241051937","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l7BFADFC13E1489250212790","screen_cid":"s8138CAE8281488638091708","target_cid":"sBF395574581489241060918","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lF2278B657B1489251792250","screen_cid":"s8138CAE8281488638091708","target_cid":"sAA4C3FD2EC1489241779906","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lE47FEE711D1489307419949","screen_cid":"s8138CAE8281488638091708","target_cid":"s78E59971E71488637525083","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lB1206335661489250230836","screen_cid":"s570C1978E51488638098815","target_cid":"s8138CAE8281488638091708","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lB2B7CD48171489250246871","screen_cid":"s570C1978E51488638098815","target_cid":"s24F50D710D1489173124577","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l008A27CB201489250253232","screen_cid":"s570C1978E51488638098815","target_cid":"s01299EC01F1489173128260","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l071CC62E111489250261730","screen_cid":"s570C1978E51488638098815","target_cid":"s9E869B93601489241051937","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l135AD816A51489250268547","screen_cid":"s570C1978E51488638098815","target_cid":"sBF395574581489241060918","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lA6D2CB63321489307428740","screen_cid":"s570C1978E51488638098815","target_cid":"s78E59971E71488637525083","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lE7216C695A1489250280787","screen_cid":"s24F50D710D1489173124577","target_cid":"s8138CAE8281488638091708","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lF8937FF1341489250285580","screen_cid":"s24F50D710D1489173124577","target_cid":"s570C1978E51488638098815","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lD17264BD871489250290933","screen_cid":"s24F50D710D1489173124577","target_cid":"s01299EC01F1489173128260","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lDE47233FAA1489250296703","screen_cid":"s24F50D710D1489173124577","target_cid":"s9E869B93601489241051937","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l7018E72A731489250301528","screen_cid":"s24F50D710D1489173124577","target_cid":"sBF395574581489241060918","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l9191BACD0B1489251844868","screen_cid":"s24F50D710D1489173124577","target_cid":"sAA4C3FD2EC1489241779906","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l05E17561DB1489307441410","screen_cid":"s24F50D710D1489173124577","target_cid":"s78E59971E71488637525083","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l68BDA86CDC1489250471920","screen_cid":"s01299EC01F1489173128260","target_cid":"s8138CAE8281488638091708","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l54ED8C16A11489250475593","screen_cid":"s01299EC01F1489173128260","target_cid":"s570C1978E51488638098815","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l89A3A67AFC1489250482111","screen_cid":"s01299EC01F1489173128260","target_cid":"s24F50D710D1489173124577","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lEC487E89931489250487384","screen_cid":"s01299EC01F1489173128260","target_cid":"s9E869B93601489241051937","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l7E8DA684CF1489250493914","screen_cid":"s01299EC01F1489173128260","target_cid":"sBF395574581489241060918","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lA9B182C8B51489250499254","screen_cid":"s01299EC01F1489173128260","target_cid":"s8C13CC9D351489247898845","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l88FD3BF5431489307563803","screen_cid":"s01299EC01F1489173128260","target_cid":"s78E59971E71488637525083","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l12001EC70A1489242756656","screen_cid":"s9E869B93601489241051937","target_cid":"sAA4C3FD2EC1489241779906","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lA0ECDCE17E1489242948291","screen_cid":"s9E869B93601489241051937","target_cid":"sAA4C3FD2EC1489241779906","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l7D2667C3671489250314352","screen_cid":"s9E869B93601489241051937","target_cid":"s8138CAE8281488638091708","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l1E10DD3A681489250322598","screen_cid":"s9E869B93601489241051937","target_cid":"s570C1978E51488638098815","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lE1CC2604381489250327278","screen_cid":"s9E869B93601489241051937","target_cid":"s24F50D710D1489173124577","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l9449B4AB8A1489250331534","screen_cid":"s9E869B93601489241051937","target_cid":"s01299EC01F1489173128260","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l07EB736BF91489250347114","screen_cid":"s9E869B93601489241051937","target_cid":"sBF395574581489241060918","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lDD5A9448F21489307500797","screen_cid":"s9E869B93601489241051937","target_cid":"s78E59971E71488637525083","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l3C59941A461489250421204","screen_cid":"sBF395574581489241060918","target_cid":"s8138CAE8281488638091708","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lD9A72098F21489250427932","screen_cid":"sBF395574581489241060918","target_cid":"s570C1978E51488638098815","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lB3D6F0164D1489250436768","screen_cid":"sBF395574581489241060918","target_cid":"s24F50D710D1489173124577","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l9B75D082C51489250442495","screen_cid":"sBF395574581489241060918","target_cid":"s01299EC01F1489173128260","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lFB4A98FDA21489250446949","screen_cid":"sBF395574581489241060918","target_cid":"s9E869B93601489241051937","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l6F000BBFBB1489250464399","screen_cid":"sBF395574581489241060918","target_cid":"s24F50D710D1489173124577","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lB38E770CB41489307536966","screen_cid":"sBF395574581489241060918","target_cid":"s78E59971E71488637525083","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l3F2529BEFD1489250357299","screen_cid":"sAA4C3FD2EC1489241779906","target_cid":"s8138CAE8281488638091708","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lB4ECCE20BE1489250361019","screen_cid":"sAA4C3FD2EC1489241779906","target_cid":"s570C1978E51488638098815","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l3D29C040591489250364984","screen_cid":"sAA4C3FD2EC1489241779906","target_cid":"s24F50D710D1489173124577","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lFF449BF7301489250372842","screen_cid":"sAA4C3FD2EC1489241779906","target_cid":"s01299EC01F1489173128260","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lA58CE3C5531489250381613","screen_cid":"sAA4C3FD2EC1489241779906","target_cid":"s9E869B93601489241051937","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lA48F6BB2251489250387192","screen_cid":"sAA4C3FD2EC1489241779906","target_cid":"sBF395574581489241060918","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lC2A5DB6DC41489250397441","screen_cid":"sAA4C3FD2EC1489241779906","target_cid":"s8C13CC9D351489247898845","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l97828B76D51489307492763","screen_cid":"sAA4C3FD2EC1489241779906","target_cid":"s78E59971E71488637525083","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l04E1FC29991489250628564","screen_cid":"s8C13CC9D351489247898845","target_cid":"s8138CAE8281488638091708","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l22A03C0CF61489250633028","screen_cid":"s8C13CC9D351489247898845","target_cid":"s570C1978E51488638098815","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"lBCD8CD3A2D1489250637378","screen_cid":"s8C13CC9D351489247898845","target_cid":"s24F50D710D1489173124577","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l5A6E9CEF721489250642146","screen_cid":"s8C13CC9D351489247898845","target_cid":"s01299EC01F1489173128260","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l58967B4CE41489250648179","screen_cid":"s8C13CC9D351489247898845","target_cid":"s9E869B93601489241051937","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"},{"cid":"l9D49DE9AAE1489250652500","screen_cid":"s8C13CC9D351489247898845","target_cid":"sBF395574581489241060918","transition":"none","gesture":"tap","timer":0.0,"menu_offset":75,"reset":true,"ani_duration":"0.2s","ani_delay":"","state_cid":null,"widget_cids":"","targetstate_cid":null,"sourcestate_cid":"default"}],"panels":[],"screen_aligns":[],"screenstates":[],"widgetstates":[],"panelstates":[],"devices":{"android":{"google_nexus":{"width":360,"height":640,"name":"Google Pixel"},"samsung":{"width":360,"height":640,"name":"Samsung"},"Xiaomi":{"width":360,"height":640,"name":"XiaoMi"},"Huawei":{"width":360,"height":640,"name":"Huawei"},"Meizu":{"width":360,"height":600,"name":"Meizu"},"google_nexus_4":{"width":384,"height":640,"name":"Google Nexus 4","hide":true},"customize":{"width":360,"height":640,"name":"Customize"}},"iphone":{"iphone_4":{"width":320,"height":480,"scale":100,"icon_size":"120x120","name":"iPhone 4","hide":true},"iphone_5":{"width":320,"height":568,"scale":100,"icon_size":"120x120","name":"iPhone 5"},"iphone_6":{"width":375,"height":667,"scale":100,"icon_size":"180x180","name":"iPhone 6/7"},"iphone_6_plus":{"width":414,"height":736,"scale":100,"icon_size":"180x180","name":"iPhone 6/7 Plus"},"ipad_3_4":{"width":768,"height":1024,"scale":75,"icon_size":"152x152","name":"iPad"},"ipad_pro":{"width":1024,"height":1366,"scale":75,"icon_size":"152x152","name":"iPad Pro"}},"ipad":{"ipad_3_4":{"width":768,"height":1024,"scale":75,"icon_size":"152x152","name":"iPad"},"ipad_pro":{"width":1024,"height":1366,"scale":75,"icon_size":"152x152","name":"iPad Pro"}},"web":{"desktop":{"width":1440,"height":1024,"name":"Webpage"}},"default":{"iphone":"iphone_5","ipad":"ipad_3_4","android":"google_nexus"}},"collaborators":[],"threads":[],"comments":[],"teams":[]}</script>
